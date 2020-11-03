@@ -15,6 +15,7 @@ MonoBehaviour:
   m_MaxPV: 30
   m_fireRate: 1
   bullet: {fileID: 5256520154423059197, guid: cc3ed1657758ce74bbb03b53105d404b, type: 3}
+  CurrentPV: 0
   m_enemySpeed: 5
   m_mainCamera: {fileID: 0}
 --- !u!1001 &1536642693555215426
@@ -37,17 +38,17 @@ PrefabInstance:
     - target: {fileID: 6027154215700530162, guid: bfe687d0ff2a7db41bc902c56a88826f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.8034794
+      value: -2.9251535
       objectReference: {fileID: 0}
     - target: {fileID: 6027154215700530162, guid: bfe687d0ff2a7db41bc902c56a88826f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.262186
+      value: -0.0000019073486
       objectReference: {fileID: 0}
     - target: {fileID: 6027154215700530162, guid: bfe687d0ff2a7db41bc902c56a88826f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.81831
+      value: 11.547036
       objectReference: {fileID: 0}
     - target: {fileID: 6027154215700530162, guid: bfe687d0ff2a7db41bc902c56a88826f,
         type: 3}

@@ -39,7 +39,7 @@ public class enemy : Entity
         move();
     }
 
-    private void move()
+    virtual protected void move()
     {
         transform.position += Vector3.back * Time.deltaTime * m_enemySpeed;
         if (m_mainCamera.WorldToScreenPoint(transform.position).y < 0)

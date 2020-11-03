@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class shootingEnemy : enemy
 {
-    Stopwatch stopwatch;
+    protected Stopwatch stopwatch;
     // Start is called before the first frame update
     void Start()
     {
         m_speedBullet = bullet.getBulletSpeed();
         m_nbrGun = 1;
+        m_dmg = 5;
     }
 
     protected override void Awake()
@@ -26,7 +27,7 @@ public class shootingEnemy : enemy
         shootingControl();
     }
 
-    void shootingControl()
+    protected void shootingControl()
     {
         if (stopwatch.Elapsed.TotalMilliseconds*Time.timeScale >= 1000 / m_fireRate)
         {

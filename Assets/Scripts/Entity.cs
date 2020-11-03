@@ -14,7 +14,7 @@ public class Entity : MonoBehaviour
     protected float m_fireRate;
     [SerializeField]
     protected Bullet bullet;
-
+    [SerializeField]
     private int CurrentPV;
 
     public int getCurrentPV()

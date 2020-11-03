@@ -120,6 +120,7 @@ public class Player : Entity
         {
             Bullet rec = collision.gameObject.GetComponent<Bullet>();
             setCurrentPV(getCurrentPV() - rec.getDamage());
+            Destroy(collision.gameObject);
             UpdateHealthSlider(getCurrentPV());
             Destroy(collision.gameObject);
         }
