@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScenesManager : EditorWindow
 {
+    List<SceneData> listScene;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +36,18 @@ public class ScenesManager : EditorWindow
         }
         GUILayout.EndVertical();
     }
+    void refreshContent()
+    {
+        listScene.Clear();
+        foreach (EditorBuildSettingsScene scene in EditorBuildSettings.scenes)
+        {
+            listScene.Add(new SceneData(Path.GetFileNameWithoutExtension(scene.path), scene.path, false, false));
+        }
+        for (int k = 0; k < EditorSceneManager.sceneCount; k++)
+        {
+            //EditorSceneManager.GetSceneAt(k).buildIndex;
+        }
+    }
 }
 
 public class SceneData
@@ -48,5 +64,4 @@ public class SceneData
         m_isActive = p_isActive;
         m_isActiveNext = p_isActiveNext;
     }
-
 }
