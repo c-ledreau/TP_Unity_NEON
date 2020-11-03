@@ -14,6 +14,10 @@ public class Bullet : MonoBehaviour
     public float m_direction;
 
 
+
+    public delegate void OnHitAction(float scoreHit);
+    public static event OnHitAction OnHit;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +62,10 @@ public class Bullet : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "enemy")
-        Destroy(gameObject);
+        {
+            OnHit(50);//collision.gameObject.GetComponent<enemy>().scoreOnHit);
+            Destroy(gameObject);
+        }
+        
     }
 }

@@ -16,11 +16,26 @@ public class Player : Entity
     [SerializeField]
     private Image image;
 
+    //interface membrers
+    [SerializeField]
+    private Slider HealthBar;
+    [SerializeField]
+    private Gradient gradient;
+    [SerializeField]
+    private Image heathFilling;
+    [SerializeField]
+    private float score = 0;
+
     protected override void Awake()
     {
         stopwatch = new Stopwatch();
         stopwatch.Start();
         setCurrentPV(m_MaxPV);
+
+        // gestion heathBar
+        HealthBar.maxValue = m_MaxPV;
+        UpdateHealthSlider(m_MaxPV);
+        heathFilling.color = gradient.Evaluate(1f);
     }
 
     // Start is called before the first frame update
@@ -30,6 +45,7 @@ public class Player : Entity
         m_speedBullet = bullet.getBulletSpeed();
         m_nbrGun = 1;
         IncreaseDmg();
+        Bullet.OnHit += OnBulletHit;
     }
 
     void Update()
@@ -92,6 +108,7 @@ public class Player : Entity
         if (collision.gameObject.tag == "enemy")
         {
             setCurrentPV(getCurrentPV() - 50);
+            UpdateHealthSlider(getCurrentPV());
         }
 
         if (collision.gameObject.tag == "PowerUp")
@@ -103,7 +120,24 @@ public class Player : Entity
         {
             Bullet rec = collision.gameObject.GetComponent<Bullet>();
             setCurrentPV(getCurrentPV() - rec.getDamage());
+            UpdateHealthSlider(getCurrentPV());
             Destroy(collision.gameObject);
         }
+    }
+
+    private void UpdateHealthSlider(int health)
+    {
+        HealthBar.value = health;
+        heathFilling.color = gradient.Evaluate(HealthBar.normalizedValue);
+    }
+
+    private void OnBulletHit(float addScore)
+    {
+        score += addScore;
+    }
+
+    public float getScore()
+    {
+        return score;
     }
 }
