@@ -8,6 +8,7 @@ public class Entity : MonoBehaviour
     protected int m_MaxPV;
     protected float m_bulletScale;
     protected float m_speedBullet;
+    [SerializeField]
     protected int m_nbrGun;
     protected int m_dmg;
     [SerializeField]
@@ -16,6 +17,7 @@ public class Entity : MonoBehaviour
     protected Bullet bullet;
     [SerializeField]
     private int CurrentPV;
+
 
     public int getCurrentPV()
     {

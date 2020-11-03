@@ -7,6 +7,8 @@ public class Boss1 : enemy
     private Transform weak1;
     private Transform weak2;
 
+    int dir;
+
     protected override void Awake()
     {
         setCurrentPV(m_MaxPV);
@@ -17,6 +19,7 @@ public class Boss1 : enemy
     {
         weak1 = gameObject.transform.GetChild(0);
         weak2 = gameObject.transform.GetChild(1);
+        dir = 1;
     }
 
     // Update is called once per frame
@@ -27,9 +30,18 @@ public class Boss1 : enemy
 
     override protected void move()
     {
+
         if (m_mainCamera.WorldToScreenPoint(transform.position).y < m_mainCamera.pixelHeight *0.9)
         {
-            transform.position += Vector3.right*Mathf.Cos(Time.deltaTime) ;
+            if(m_mainCamera.WorldToScreenPoint(transform.position).x < m_mainCamera.pixelWidth * 0.3)
+            {
+                dir = 1;
+            }
+            if (m_mainCamera.WorldToScreenPoint(transform.position).x > m_mainCamera.pixelWidth * 0.3 + m_mainCamera.pixelWidth * 0.3)
+            {
+                dir = -1;
+            }
+            transform.position += Vector3.right * Time.deltaTime * 5 * dir;
         }
         else
         {

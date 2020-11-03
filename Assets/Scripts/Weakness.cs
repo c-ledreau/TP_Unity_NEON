@@ -19,7 +19,6 @@ public class Weakness : shootingEnemy
         boss1 = transform.parent.gameObject.GetComponent<Boss1>();
         m_mainCamera = boss1.m_mainCamera;
         m_speedBullet = bullet.getBulletSpeed();
-        m_nbrGun = 2;
     }
 
     // Update is called once per frame
