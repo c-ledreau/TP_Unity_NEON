@@ -10,7 +10,6 @@ public class shootingEnemy : enemy
     void Start()
     {
         m_speedBullet = bullet.getBulletSpeed();
-        m_nbrGun = 1;
         m_dmg = 5;
     }
 

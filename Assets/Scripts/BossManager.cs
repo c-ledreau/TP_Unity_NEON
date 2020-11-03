@@ -17,7 +17,7 @@ public class BossManager : MonoBehaviour
     {
         boss1.m_mainCamera = m_mainCamera;
         height = m_mainCamera.WorldToScreenPoint(m_spaceship.transform.position).z;
-        Vector3 bossPos = m_mainCamera.ScreenToWorldPoint(new Vector3(Random.Range(m_mainCamera.pixelWidth * 0.1f, m_mainCamera.pixelWidth * 0.9f), m_mainCamera.pixelHeight, height));
+        Vector3 bossPos = m_mainCamera.ScreenToWorldPoint(new Vector3(Random.Range(m_mainCamera.pixelWidth * 0.3f, m_mainCamera.pixelWidth * 0.6f), m_mainCamera.pixelHeight, height));
         boss1.transform.position = bossPos;
         Instantiate(boss1);
     }
@@ -25,5 +25,7 @@ public class BossManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
     }
+
 }

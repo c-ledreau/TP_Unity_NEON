@@ -59,6 +59,7 @@ public class enemy : Entity
         {
             Bullet bull = collision.gameObject.GetComponent<Bullet>();
             setCurrentPV(getCurrentPV() - bull.getDamage());
+            Destroy(bull.gameObject);
         }
     }
 }

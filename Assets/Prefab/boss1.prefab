@@ -103,10 +103,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4338176552869483073}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f55e58a0f50c7af409c9d3bf671e6399, type: 3}
+  m_Script: {fileID: 11500000, guid: 65d6cf33ded39b744817ea9fea7ca4b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_MaxPV: 50
+  m_nbrGun: 2
   m_fireRate: 2
   bullet: {fileID: 5256520154423059197, guid: cc3ed1657758ce74bbb03b53105d404b, type: 3}
   CurrentPV: 0
@@ -215,10 +216,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4338176552997509211}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f55e58a0f50c7af409c9d3bf671e6399, type: 3}
+  m_Script: {fileID: 11500000, guid: 65d6cf33ded39b744817ea9fea7ca4b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_MaxPV: 50
+  m_nbrGun: 2
   m_fireRate: 2
   bullet: {fileID: 5256520154423059197, guid: cc3ed1657758ce74bbb03b53105d404b, type: 3}
   CurrentPV: 0
@@ -252,7 +254,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4338176554443677298}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.8218033, y: 1.262186, z: 10.81831}
+  m_LocalPosition: {x: -4.540443, y: -0.0000019073486, z: 11.547036}
   m_LocalScale: {x: 10, y: 1, z: 1}
   m_Children:
   - {fileID: 4338176552997509212}
@@ -333,6 +335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MaxPV: 100
+  m_nbrGun: 0
   m_fireRate: 2
   bullet: {fileID: 5256520154423059197, guid: cc3ed1657758ce74bbb03b53105d404b, type: 3}
   CurrentPV: 0

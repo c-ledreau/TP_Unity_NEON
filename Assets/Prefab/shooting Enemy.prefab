@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MaxPV: 30
+  m_nbrGun: 1
   m_fireRate: 1
   bullet: {fileID: 5256520154423059197, guid: cc3ed1657758ce74bbb03b53105d404b, type: 3}
   CurrentPV: 0
