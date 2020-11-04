@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
@@ -8,17 +9,17 @@ using UnityEngine.SceneManagement;
 
 public class ScenesManager : EditorWindow
 {
-    List<SceneData> listScene;
+    List<SceneData> listScene = new List<SceneData>();
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     [MenuItem("Tools/Scenes manager")]
@@ -26,16 +27,54 @@ public class ScenesManager : EditorWindow
     {
         GetWindow<ScenesManager>("new window");
     }
+
     private void OnGUI()
     {
         GUILayout.BeginVertical();
-        GUILayout.Label("hello world");
-        if (GUILayout.Button("click"))
+        if (GUILayout.Button("Refresh the list"))
         {
-            Debug.Log("the cake IS A LIE");
+            refreshContent();
         }
+
+        GUILayout.BeginScrollView(Vector2.zero);
+        foreach (SceneData data in listScene)
+        {
+            data.m_isActiveNext = GUILayout.Toggle(data.m_isActiveNext, data.m_name);
+
+            if (data.m_isActiveNext)
+            {
+                EditorSceneManager.OpenScene(data.m_path, OpenSceneMode.Additive);
+            }
+            else
+            {
+                if (EditorSceneManager.sceneCount > 0)
+                {
+                    EditorSceneManager.CloseScene(EditorSceneManager.GetSceneByName(data.m_name), true);
+                }
+                else
+                {
+                    Debug.Log("You must have at least one loaded scene");
+                    GUILayout.Label("You must have at least one loaded scene");
+                    data.m_isActiveNext = true;
+                }
+            }
+            data.m_isActive = data.m_isActiveNext;
+        }
+
+        GUILayout.EndScrollView();
+
         GUILayout.EndVertical();
     }
+
+    [MenuItem("Assets/Scene/Add to build", false)]
+    static void AddToBuild()
+    {
+        Object toBuild;
+        toBuild = Selection.activeObject as SceneAsset;
+        Debug.Log(toBuild);
+
+    }
+
     void refreshContent()
     {
         listScene.Clear();
@@ -45,7 +84,8 @@ public class ScenesManager : EditorWindow
         }
         for (int k = 0; k < EditorSceneManager.sceneCount; k++)
         {
-            //EditorSceneManager.GetSceneAt(k).buildIndex;
+            listScene[EditorSceneManager.GetSceneAt(k).buildIndex+1].m_isActive = true;
+            listScene[EditorSceneManager.GetSceneAt(k).buildIndex+1].m_isActiveNext = true; 
         }
     }
 }
