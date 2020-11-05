@@ -67,12 +67,41 @@ public class ScenesManager : EditorWindow
     }
 
     [MenuItem("Assets/Scene/Add to build", false)]
-    static void AddToBuild()
+    static  void AddToBuild()
     {
-        Object toBuild;
-        toBuild = Selection.activeObject as SceneAsset;
-        Debug.Log(toBuild);
+        if (AddToBuildValidate())
+        {
+            SceneAsset toBuild = Selection.activeObject as SceneAsset;
+            List<EditorBuildSettingsScene> listBuild = new List<EditorBuildSettingsScene>();
+            List<string> listBuildName = new List<string>();
 
+            foreach (EditorBuildSettingsScene data in EditorBuildSettings.scenes)
+            {
+                listBuild.Add(data);
+                listBuildName.Add(Path.GetFileNameWithoutExtension(data.path));
+            }
+            if (listBuildName.Contains(toBuild.name))
+            {
+                Debug.Log("cette scène est déjà dans la liste des scènes du build");
+            }
+            else
+            {
+                Debug.Log(toBuild.name + " est maintenant dans la liste des scène à build");
+                listBuild.Add(new EditorBuildSettingsScene(AssetDatabase.GetAssetPath(toBuild), true));
+                EditorBuildSettings.scenes = listBuild.ToArray();
+            }
+        }
+    }
+
+    [MenuItem("Assets/Scene/Add to build", true)]
+    static bool AddToBuildValidate()
+    {
+        var test = Selection.activeObject;
+        if (test.GetType() == typeof(SceneAsset))
+        {
+            return true;
+        }
+        return false;
     }
 
     void refreshContent()
