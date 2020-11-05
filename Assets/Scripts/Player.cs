@@ -141,4 +141,9 @@ public class Player : Entity
     {
         return score;
     }
+
+    public void addScore(float add)
+    {
+        score += add;
+    }
 }

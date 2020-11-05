@@ -10,6 +10,18 @@ public class PowerUp : MonoBehaviour
     public Player m_spaceShip;
     public bool isSpaceShip;
 
+    public delegate void PowerTake(powTypes pow);
+    public static event PowerTake getPow;
+
+    public enum powTypes
+    {
+        fireRate,
+        bulletSpeed,
+        addGun,
+        damage,
+        score,
+    };
+
     void start()
     {
 
@@ -40,7 +52,8 @@ public class PowerUp : MonoBehaviour
 
     void powerUp()
     {
-        int i = Random.Range(1, 4);
+        powTypes pow = powTypes.score;
+        int i = Random.Range(1, 5);
         //int i = 4;
         if (i == 0) //bigger bullets
         {
@@ -50,23 +63,28 @@ public class PowerUp : MonoBehaviour
         if (i == 1) //increase fire rate
         {
             Debug.Log("increase fire rate");
-            m_spaceShip.IncreaseFireRate();
+            //m_spaceShip.IncreaseFireRate();
+            pow = powTypes.fireRate;
         }
         if (i == 2) // increase speed bullet
         {
             Debug.Log("increase speed bullet");
-            m_spaceShip.IncreaseSpeedBullet();
+            //m_spaceShip.IncreaseSpeedBullet();
+            pow = powTypes.bulletSpeed;
         }
         if (i == 3) // add new gun
         {
             Debug.Log("add new gun");
-            m_spaceShip.IncreaseNbrGun();
+            //m_spaceShip.IncreaseNbrGun();
+            pow = powTypes.addGun;
         }
         if (i == 4) // increase dps
         {
             Debug.Log("increase dps");
-            m_spaceShip.IncreaseDmg();
+            //m_spaceShip.IncreaseDmg();
+            pow = powTypes.damage;
 
         }
+        getPow(pow);
     }
 }
