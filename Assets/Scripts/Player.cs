@@ -86,7 +86,6 @@ public class Player : Entity
         if (Input.GetKey(KeyCode.Space) && stopwatch.Elapsed.TotalMilliseconds >= 1000/m_fireRate)
         {
             bullet.m_MainCamera = m_MainCamera;
-            UnityEngine.Debug.Log("aaaaa");
             for (int k = 0; k < m_nbrGun; k++)
             {
                 Bullet bull;
@@ -105,6 +104,7 @@ public class Player : Entity
     
     void OnCollisionEnter(Collision collision)
     {
+
         if (collision.gameObject.tag == "enemy")
         {
             setCurrentPV(getCurrentPV() - 50);

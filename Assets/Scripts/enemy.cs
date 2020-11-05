@@ -50,6 +50,8 @@ public class enemy : Entity
 
     void OnCollisionEnter(Collision collision)
     {
+        UnityEngine.Debug.Log("aaaaa");
+
         if (collision.gameObject.tag == "Player")
         {
             setCurrentPV(getCurrentPV() - 100);
