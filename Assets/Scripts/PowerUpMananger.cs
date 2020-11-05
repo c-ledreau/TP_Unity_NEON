@@ -15,10 +15,12 @@ public class PowerUpMananger : MonoBehaviour
 
     private float height;
 
+    
     private int damageCnt = 0;
     private int fireRateCnt = 0;
     private int bulletSpeedCnt = 0;
     private int nbGunsCnt = 0;
+
 
     [SerializeField]
     private GameObject[] fireRateArray;
