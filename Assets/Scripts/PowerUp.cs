@@ -20,6 +20,7 @@ public class PowerUp : MonoBehaviour
         addGun,
         damage,
         score,
+        heal,
     };
 
     void start()
@@ -53,12 +54,13 @@ public class PowerUp : MonoBehaviour
     void powerUp()
     {
         powTypes pow = powTypes.score;
-        int i = Random.Range(1, 5);
+        int i = Random.Range(0, 5);
         //int i = 4;
         if (i == 0) //bigger bullets
         {
-            Debug.Log("bigger bullets");
+            Debug.Log("Heal");
             //m_spaceShip.m_bulletScale += 0.2f;
+            pow = powTypes.heal;
         }
         if (i == 1) //increase fire rate
         {

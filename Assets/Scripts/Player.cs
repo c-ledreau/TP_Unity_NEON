@@ -34,7 +34,7 @@ public class Player : Entity
 
         // gestion heathBar
         HealthBar.maxValue = m_MaxPV;
-        UpdateHealthSlider(m_MaxPV);
+        UpdateHealthSlider();
         heathFilling.color = gradient.Evaluate(1f);
     }
 
@@ -108,7 +108,7 @@ public class Player : Entity
         if (collision.gameObject.tag == "enemy")
         {
             setCurrentPV(getCurrentPV() - 20);
-            UpdateHealthSlider(getCurrentPV());
+            UpdateHealthSlider();
         }
 
         if (collision.gameObject.tag == "PowerUp")
@@ -121,14 +121,14 @@ public class Player : Entity
             Bullet rec = collision.gameObject.GetComponent<Bullet>();
             setCurrentPV(getCurrentPV() - rec.getDamage());
             Destroy(collision.gameObject);
-            UpdateHealthSlider(getCurrentPV());
+            UpdateHealthSlider();
             Destroy(collision.gameObject);
         }
     }
 
-    private void UpdateHealthSlider(int health)
+    public void UpdateHealthSlider()
     {
-        HealthBar.value = health;
+        HealthBar.value = getCurrentPV();
         heathFilling.color = gradient.Evaluate(HealthBar.normalizedValue);
     }
 

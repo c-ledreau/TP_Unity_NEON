@@ -41,12 +41,12 @@ public class Entity : MonoBehaviour
 
     public void IncreaseFireRate()
     {
-        m_fireRate += 5.0f;
+        m_fireRate += 1.0f;
     }
 
     public void IncreaseSpeedBullet()
     {
-        m_speedBullet += 5.0f;
+        m_speedBullet += 1.0f;
     }
 
     public void IncreaseNbrGun()
@@ -56,7 +56,19 @@ public class Entity : MonoBehaviour
 
     public void IncreaseDmg()
     {
-        m_dmg += 5;
+        m_dmg += 3;
+    }
+
+    public void Heal()
+    {
+        if ((CurrentPV + 10) < m_MaxPV)
+        {
+            CurrentPV += 10;
+        }
+        else
+        {
+            CurrentPV = m_MaxPV;
+        }
     }
 
     // Start is called before the first frame update

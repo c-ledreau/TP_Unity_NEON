@@ -110,6 +110,15 @@ public class PowerUpMananger : MonoBehaviour
                     }
                     break;
                 }
+                case PowerUp.powTypes.heal:
+                {
+                    if (damageCnt < 5)
+                    {
+                        m_spaceship.Heal();
+                        m_spaceship.UpdateHealthSlider();
+                    }
+                    break;
+                }
         }
     }
 
