@@ -107,7 +107,7 @@ public class Player : Entity
 
         if (collision.gameObject.tag == "enemy")
         {
-            setCurrentPV(getCurrentPV() - 50);
+            setCurrentPV(getCurrentPV() - 20);
             UpdateHealthSlider(getCurrentPV());
         }
 
