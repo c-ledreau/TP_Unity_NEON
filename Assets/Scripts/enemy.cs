@@ -8,7 +8,7 @@ public class enemy : Entity
     private float m_enemySpeed;
     [SerializeField]
     public Camera m_mainCamera;
-    private TrailRenderer trail;
+
 
     protected override void Awake()
     {
@@ -18,13 +18,11 @@ public class enemy : Entity
     // Start is called before the first frame update
     void Start()
     {
-        trail = GetComponent<TrailRenderer>();
     }
 
     void Update()
     {
         isDead();
-            trail.SetPosition(trail.positionCount,new Vector3(-10, -10, -10));
     }
 
     protected void isDead()
@@ -52,8 +50,6 @@ public class enemy : Entity
 
     void OnCollisionEnter(Collision collision)
     {
-        UnityEngine.Debug.Log("aaaaa");
-
         if (collision.gameObject.tag == "Player")
         {
             setCurrentPV(getCurrentPV() - 100);

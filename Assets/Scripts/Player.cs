@@ -15,6 +15,7 @@ public class Player : Entity
     Stopwatch stopwatch;
     [SerializeField]
     private Image image;
+    private TrailRenderer line;
 
     //interface membrers
     [SerializeField]
@@ -25,6 +26,9 @@ public class Player : Entity
     private Image heathFilling;
     [SerializeField]
     private float score = 0;
+
+    float vertical;
+    private Rigidbody rb;
 
     protected override void Awake()
     {
@@ -46,6 +50,8 @@ public class Player : Entity
         m_nbrGun = 1;
         IncreaseDmg();
         Bullet.OnHit += OnBulletHit;
+        line = transform.GetComponent<TrailRenderer>();
+        rb = transform.GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -61,29 +67,41 @@ public class Player : Entity
     void FixedUpdate()
     {
         PlayerControl();
+        Trail();
     }
 
+    void Trail()
+    {
+        for (int k = 1; k < line.positionCount; k++)
+        {
+            line.SetPosition(k, line.GetPosition(k) + Vector3.back * 0.3f);
+        }
+    }
 
     void PlayerControl()
     {
         Vector3 screenPos = m_MainCamera.WorldToScreenPoint(transform.position);
-        if (Input.GetKey(KeyCode.LeftArrow) && screenPos.x > 0) 
+        float mH = Input.GetAxis("Horizontal");
+        float mV = Input.GetAxis("Vertical");
+        rb.velocity = new Vector3(mH * m_HorizontalSpeed, 0, mV * m_VerticalSpeed + 0.5f);
+
+        if (screenPos.x < 0)
         {
-            transform.position += Vector3.left * Time.deltaTime * m_VerticalSpeed;
+            rb.velocity = new Vector3(1, 0, 0);
         }
-        if (Input.GetKey(KeyCode.RightArrow) && screenPos.x < m_MainCamera.pixelWidth )
+        if (screenPos.x > m_MainCamera.pixelWidth)
         {
-            transform.position += Vector3.right * Time.deltaTime * m_VerticalSpeed;
+            rb.velocity = new Vector3(-1, 0, 0);
         }
-        if (Input.GetKey(KeyCode.UpArrow) && screenPos.y < m_MainCamera.pixelHeight)
+        if (screenPos.y > m_MainCamera.pixelHeight)
         {
-            transform.position += Vector3.forward * Time.deltaTime * m_HorizontalSpeed * 0.5f;
+            rb.velocity = new Vector3(0, 0, -1);
         }
-        if (Input.GetKey(KeyCode.DownArrow) && screenPos.y > m_MainCamera.pixelHeight*0.2)
+        if (screenPos.y < m_MainCamera.pixelHeight * 0.2)
         {
-            transform.position += Vector3.back * Time.deltaTime * m_HorizontalSpeed * 2.0f;
+            rb.velocity = new Vector3(0, 0, 1);
         }
-        if (Input.GetKey(KeyCode.Space) && stopwatch.Elapsed.TotalMilliseconds >= 1000/m_fireRate)
+        if (Input.GetKey(KeyCode.Space) && stopwatch.Elapsed.TotalMilliseconds >= 1000 / m_fireRate)
         {
             bullet.m_MainCamera = m_MainCamera;
             for (int k = 0; k < m_nbrGun; k++)
@@ -92,16 +110,15 @@ public class Player : Entity
                 bull = Instantiate(bullet);
                 bull.m_direction = 1.0f;
                 bull.setDamage(m_dmg);
-                bull.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z+ 2);
-                bull.m_angle = (-(m_nbrGun-1)+k*2)/10.0f;
+                bull.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 2);
+                bull.m_angle = (-(m_nbrGun - 1) + k * 2) / 10.0f;
                 bull.transform.localScale = new Vector3(m_bulletScale, m_bulletScale, m_bulletScale);
                 bull.setBulletSpeed(m_speedBullet);
             }
             stopwatch.Restart();
         }
-
     }
-    
+
     void OnCollisionEnter(Collision collision)
     {
 

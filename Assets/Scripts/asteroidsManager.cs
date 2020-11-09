@@ -36,7 +36,7 @@ public class asteroidsManager : MonoBehaviour
             m_ast.transform.position = astPos;
 
             Instantiate(m_ast);
-            yield return new WaitForSeconds(Random.Range(0.5f, 1.5f));
+            yield return new WaitForSeconds(Random.Range(0.5f, 1.5f) * m_spawningTime);
         }
 
     }
