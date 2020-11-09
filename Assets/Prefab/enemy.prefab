@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6027154215700530162}
   - component: {fileID: 8238227703155749243}
   - component: {fileID: 4951318408914033963}
-  - component: {fileID: 5163667780686922587}
   - component: {fileID: 995710334086129873}
+  - component: {fileID: 240395439583667360}
   m_Layer: 0
   m_Name: enemy
   m_TagString: enemy
@@ -82,19 +82,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &5163667780686922587
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1329193235800414538}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 4.019279
-  m_Center: {x: 0, y: -2.7143674, z: 0.08146167}
 --- !u!114 &995710334086129873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,6 +101,20 @@ MonoBehaviour:
   CurrentPV: 0
   m_enemySpeed: 5
   m_mainCamera: {fileID: 0}
+--- !u!136 &240395439583667360
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329193235800414538}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.2
+  m_Height: 10
+  m_Direction: 1
+  m_Center: {x: -0.5, y: -2.8701384, z: 0.0000018874804}
 --- !u!1 &6268862715520147354
 GameObject:
   m_ObjectHideFlags: 0
