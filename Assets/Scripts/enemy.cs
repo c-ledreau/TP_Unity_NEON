@@ -8,6 +8,17 @@ public class enemy : Entity
     private float m_enemySpeed;
     [SerializeField]
     public Camera m_mainCamera;
+    [SerializeField]
+    private float scoreOnDestruct = 50;
+
+    [SerializeField]
+    private float powSpawnProba = .2f;
+
+    public delegate void OnHitAction(float addedScore);
+    public static event OnHitAction OnDestruct;
+
+    public delegate void SpamwPowAction(Vector3 foePos);
+    public static event SpamwPowAction spawn;
 
 
     protected override void Awake()
@@ -22,13 +33,21 @@ public class enemy : Entity
 
     void Update()
     {
-        isDead();
+       
     }
 
     protected void isDead()
     {
         if (getCurrentPV() <= 0)
         {
+            float toto = Random.Range(0, 101);
+            if (powSpawnProba*100 >= toto)
+            {
+                //Debug.Log(toto);
+                spawn(transform.position);
+            }
+            OnDestruct(scoreOnDestruct);
+            
             Destroy(gameObject);
         }
     }
@@ -58,8 +77,13 @@ public class enemy : Entity
         if (collision.gameObject.tag == "bullet")
         {
             Bullet bull = collision.gameObject.GetComponent<Bullet>();
-            setCurrentPV(getCurrentPV() - bull.getDamage());
+            if (bull.isFromPlayer())
+            {
+                setCurrentPV(getCurrentPV() - bull.getDamage());
+                
+            }
             Destroy(bull.gameObject);
         }
+        isDead();
     }
 }

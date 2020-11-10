@@ -35,10 +35,11 @@ public class PowerUpMananger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(Test());
-        Debug.Log("test");
+        //StartCoroutine(Test());
+        //Debug.Log("test");
         height = m_mainCamera.WorldToScreenPoint(m_spaceship.transform.position).z;
         PowerUp.getPow += PowerUpLimitor;
+        enemy.spawn += spawPow;
     }
 
     // Update is called once per frame
@@ -52,10 +53,7 @@ public class PowerUpMananger : MonoBehaviour
         while (Application.isPlaying)
         {
             Vector3 foePos = m_mainCamera.ScreenToWorldPoint(new Vector3(Random.Range(m_mainCamera.pixelWidth * 0.1f, m_mainCamera.pixelWidth * 0.9f), m_mainCamera.pixelHeight, height));
-            m_powerUp.m_mainCamera = m_mainCamera;
-            m_powerUp.m_spaceShip = m_spaceship;
-            m_powerUp.transform.position = foePos;
-            Instantiate(m_powerUp);
+            spawPow(foePos);
             yield return new WaitForSeconds(m_spawningTime);
         }
     }
@@ -136,6 +134,15 @@ public class PowerUpMananger : MonoBehaviour
 
             }
         }
+    }
+
+
+    private void spawPow(Vector3 pos)
+    {
+        m_powerUp.m_mainCamera = m_mainCamera;
+        m_powerUp.m_spaceShip = m_spaceship;
+        m_powerUp.transform.position = pos;
+        Instantiate(m_powerUp);
     }
 
 }

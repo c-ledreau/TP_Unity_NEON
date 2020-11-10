@@ -113,6 +113,8 @@ MonoBehaviour:
   CurrentPV: 0
   m_enemySpeed: 0
   m_mainCamera: {fileID: 0}
+  scoreOnDestruct: 50
+  powSpawnProba: 0.9
 --- !u!1 &4338176552997509211
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,6 +228,8 @@ MonoBehaviour:
   CurrentPV: 0
   m_enemySpeed: 0
   m_mainCamera: {fileID: 0}
+  scoreOnDestruct: 50
+  powSpawnProba: 0.9
 --- !u!1 &4338176554443677298
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,7 +258,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4338176554443677298}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.6994274, y: 1, z: 10.969684}
+  m_LocalPosition: {x: 1.5121512, y: 1, z: 10.969684}
   m_LocalScale: {x: 10, y: 1, z: 1}
   m_Children:
   - {fileID: 4338176552997509212}
@@ -341,3 +345,5 @@ MonoBehaviour:
   CurrentPV: 0
   m_enemySpeed: 0
   m_mainCamera: {fileID: 0}
+  scoreOnDestruct: 500
+  powSpawnProba: 1

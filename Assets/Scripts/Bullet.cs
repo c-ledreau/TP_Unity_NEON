@@ -13,6 +13,7 @@ public class Bullet : MonoBehaviour
     private int m_damage = 5;
     public float m_direction;
 
+    private bool FromPlayer;
 
 
     public delegate void OnHitAction(float scoreHit);
@@ -61,11 +62,21 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "enemy")
+        if (collision.gameObject.tag == "enemy" && FromPlayer == true)
         {
-            OnHit(50);//collision.gameObject.GetComponent<enemy>().scoreOnHit);
+            //OnHit(collision.gameObject.GetComponent<enemy>().scoreOnHit);
             Destroy(gameObject);
         }
         
+    }
+
+    public void setOrigine(bool origine)
+    {
+        FromPlayer = origine;
+    }
+
+    public bool isFromPlayer()
+    {
+        return FromPlayer;
     }
 }

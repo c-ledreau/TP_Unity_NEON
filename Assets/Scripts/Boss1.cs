@@ -20,6 +20,8 @@ public class Boss1 : enemy
         weak1 = gameObject.transform.GetChild(0);
         weak2 = gameObject.transform.GetChild(1);
         dir = 1;
+        //scoreOnDestruct = 500;
+        
     }
 
     // Update is called once per frame

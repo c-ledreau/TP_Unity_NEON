@@ -49,7 +49,7 @@ public class Player : Entity
         m_speedBullet = bullet.getBulletSpeed();
         m_nbrGun = 1;
         IncreaseDmg();
-        Bullet.OnHit += OnBulletHit;
+        enemy.OnDestruct += addScore;
         line = transform.GetComponent<TrailRenderer>();
         rb = transform.GetComponent<Rigidbody>();
     }
@@ -114,6 +114,7 @@ public class Player : Entity
                 bull.m_angle = (-(m_nbrGun - 1) + k * 2) / 10.0f;
                 bull.transform.localScale = new Vector3(m_bulletScale, m_bulletScale, m_bulletScale);
                 bull.setBulletSpeed(m_speedBullet);
+                bull.setOrigine(true);
             }
             stopwatch.Restart();
         }

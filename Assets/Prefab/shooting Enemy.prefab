@@ -19,6 +19,8 @@ MonoBehaviour:
   CurrentPV: 0
   m_enemySpeed: 5
   m_mainCamera: {fileID: 0}
+  scoreOnDestruct: 75
+  powSpawnProba: 0.9
 --- !u!1001 &1536642693555215426
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39,7 +41,7 @@ PrefabInstance:
     - target: {fileID: 6027154215700530162, guid: bfe687d0ff2a7db41bc902c56a88826f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.902837
+      value: -5.1357317
       objectReference: {fileID: 0}
     - target: {fileID: 6027154215700530162, guid: bfe687d0ff2a7db41bc902c56a88826f,
         type: 3}
