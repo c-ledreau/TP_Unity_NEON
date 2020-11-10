@@ -6,6 +6,7 @@ public class PowerUp : MonoBehaviour
 {
     [SerializeField]
     private float m_powerUpSpeed;
+
     public Camera m_mainCamera;
     public Player m_spaceShip;
     public bool isSpaceShip;

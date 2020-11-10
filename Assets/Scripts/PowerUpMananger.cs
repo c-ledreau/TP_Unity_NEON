@@ -65,6 +65,7 @@ public class PowerUpMananger : MonoBehaviour
     /// <param name="pow"> pow is a powTypes enum which can be : fireRate, bulletSpeed, addGun, damage or score</param>
     private void PowerUpLimitor(PowerUp.powTypes pow)
     {
+        Debug.Log("limitor");
         m_spaceship.addScore(200);
         switch (pow)
         {
@@ -137,7 +138,7 @@ public class PowerUpMananger : MonoBehaviour
     }
 
 
-    private void spawPow(Vector3 pos)
+    public void spawPow(Vector3 pos)
     {
         m_powerUp.m_mainCamera = m_mainCamera;
         m_powerUp.m_spaceShip = m_spaceship;
