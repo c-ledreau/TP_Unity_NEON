@@ -13,7 +13,7 @@ public class rotation : MonoBehaviour
     {
         while (Application.isPlaying)
         {
-            transform.Rotate(30, 0, 0);
+            transform.Rotate(0, 30, 0);
             yield return new WaitForSeconds(0.5f);
         }
     }

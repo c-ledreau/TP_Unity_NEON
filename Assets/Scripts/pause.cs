@@ -8,7 +8,7 @@ public class pause : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -16,13 +16,37 @@ public class pause : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && !isPaused)
         {
-            Time.timeScale = 0;
             isPaused = true;
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && isPaused)
         {
-            Time.timeScale = 1;
             isPaused = false;
+        }
+
+        performPause();
+    }
+
+    public void setPause()
+    {
+        if (!isPaused)
+        {
+            isPaused = true;
+        }
+        else if (isPaused)
+        {
+            isPaused = false;
+        }
+    }
+
+    public void performPause()
+    {
+        if (isPaused)
+        {
+            Time.timeScale = 0;
+        }
+        else if (!isPaused)
+        {
+            Time.timeScale = 1;
         }
     }
 }

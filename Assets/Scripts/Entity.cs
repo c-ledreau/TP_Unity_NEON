@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    [SerializeField]
-    protected int m_MaxPV;
+    public int m_MaxPV;
     protected float m_bulletScale;
     protected float m_speedBullet;
     [SerializeField]
     protected int m_nbrGun;
     protected int m_dmg;
-    [SerializeField]
-    protected float m_fireRate;
+    public float m_fireRate;
     [SerializeField]
     protected Bullet bullet;
     [SerializeField]

@@ -35,6 +35,7 @@ public class enemyManager : MonoBehaviour
     {
         while (Application.isPlaying)
         {
+            Debug.Log("test");
             Vector3 foePos = m_mainCamera.ScreenToWorldPoint(new Vector3(Random.Range(m_mainCamera.pixelWidth * 0.1f, m_mainCamera.pixelWidth * 0.9f), m_mainCamera.pixelHeight, height));
             m_foe.m_mainCamera = m_mainCamera;
             m_foe.transform.position = foePos;
@@ -44,9 +45,9 @@ public class enemyManager : MonoBehaviour
             m_shootingFoe.transform.position = shootingFoePos;
 
             Instantiate(m_foe);
-            yield return new WaitForSeconds(Random.Range(0.5f,1.5f));
+            yield return new WaitForSeconds(Random.Range(0.5f,1.5f)* m_spawningTime);
             Instantiate(m_shootingFoe);
-            yield return new WaitForSeconds(Random.Range(0.5f, 1.5f));
+            yield return new WaitForSeconds(Random.Range(0.5f, 1.5f) * m_spawningTime);
         }
 
     }
@@ -56,7 +57,6 @@ public class enemyManager : MonoBehaviour
         while (Application.isPlaying)
         {
             int i = Random.Range(0, 4);
-            //int i = 3;
             int k = 11;
             switch (i)
             {
