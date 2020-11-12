@@ -78,7 +78,7 @@ public class spaceshipManager : MonoBehaviour
         {
             ply.m_MaxPV = 80;
             ply.m_fireRate = 6;
-            player.GetComponent<BoxCollider>().size = new Vector3(0,0.01f,0);
+            player.GetComponent<BoxCollider>().size -= new Vector3(0,0.008f,0);
         }
     }
 }

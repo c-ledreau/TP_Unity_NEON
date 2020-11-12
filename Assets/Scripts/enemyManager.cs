@@ -14,28 +14,27 @@ public class enemyManager : MonoBehaviour
     private GameObject m_spaceship;
     [SerializeField]
     private Camera m_mainCamera;
-
     private float height;
+    int cpt;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(Pattern());
-        StartCoroutine(Alea());
+        //StartCoroutine(Pattern());
+        //StartCoroutine(Alea());
+        StartCoroutine(Moving());
         height = m_mainCamera.WorldToScreenPoint(m_spaceship.transform.position).z;
     }
 
     // Update is called once per frame
     void Update()
     {
-
     }
 
     IEnumerator Alea()
     {
         while (Application.isPlaying)
         {
-            Debug.Log("test");
             Vector3 foePos = m_mainCamera.ScreenToWorldPoint(new Vector3(Random.Range(m_mainCamera.pixelWidth * 0.1f, m_mainCamera.pixelWidth * 0.9f), m_mainCamera.pixelHeight, height));
             m_foe.m_mainCamera = m_mainCamera;
             m_foe.transform.position = foePos;
@@ -45,11 +44,35 @@ public class enemyManager : MonoBehaviour
             m_shootingFoe.transform.position = shootingFoePos;
 
             Instantiate(m_foe);
-            yield return new WaitForSeconds(Random.Range(0.5f,1.5f)* m_spawningTime);
+            yield return new WaitForSeconds(Random.Range(0.1f,1.0f)* m_spawningTime);
             Instantiate(m_shootingFoe);
             yield return new WaitForSeconds(Random.Range(0.5f, 1.5f) * m_spawningTime);
         }
 
+    }
+
+    IEnumerator Moving()
+    {
+        while (Application.isPlaying)
+        {
+            Vector3 Pos = m_mainCamera.ScreenToWorldPoint(new Vector3((cpt + 0.5f) * m_mainCamera.pixelWidth / 5, m_mainCamera.pixelHeight, height));
+            m_foe.m_mainCamera = m_mainCamera;
+            m_foe.transform.position = Pos;
+            enemy newOne = Instantiate(m_foe);
+            MovingNewOne(newOne);
+            cpt++;
+            yield return new WaitForSeconds(0.5f);
+            if (cpt == 5)
+            {
+                yield return new WaitForSeconds(5);
+                cpt = 0;
+            }
+        }
+    }
+
+    void MovingNewOne(enemy newO)
+    {
+        newO.transform.position += new Vector3(Time.deltaTime, 0, Time.deltaTime * 10);
     }
 
     IEnumerator Pattern()

@@ -1343,7 +1343,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &293240995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9740,6 +9740,7 @@ MonoBehaviour:
   boss1: {fileID: 4338176554443677303, guid: 59242dcafa9d48442924b1b365e72590, type: 3}
   m_spaceship: {fileID: 18592183}
   m_mainCamera: {fileID: 415810151}
+  m_player: {fileID: 0}
 --- !u!1 &1958624954
 GameObject:
   m_ObjectHideFlags: 0
