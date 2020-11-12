@@ -25,6 +25,8 @@ public class Player : Entity
     [SerializeField]
     private float score = 0;
 
+    public Bullet.patterns pattern = Bullet.patterns.Base;
+
     float vertical;
     private Rigidbody rb;
 
@@ -108,11 +110,16 @@ public class Player : Entity
                 bull = Instantiate(bullet);
                 bull.m_direction = 1.0f;
                 bull.setDamage(m_dmg);
-                bull.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 3);
+                if (pattern == Bullet.patterns.Sinus)
+                    bull.transform.position = new Vector3(transform.position.x -.5f, transform.position.y, transform.position.z + 3);
+                else
+                    bull.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 3);
                 bull.m_angle = (-(m_nbrGun - 1) + k * 2) / 10.0f;
                 bull.transform.localScale = new Vector3(m_bulletScale, m_bulletScale, m_bulletScale);
                 bull.setBulletSpeed(m_speedBullet);
                 bull.setOrigine(true);
+                bull.pattern = pattern;
+                
             }
             stopwatch.Restart();
         }
