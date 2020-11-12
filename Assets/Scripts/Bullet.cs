@@ -16,13 +16,24 @@ public class Bullet : MonoBehaviour
     private bool FromPlayer;
 
 
+    //TEST MEMBERS
+    private float time = 0;
+
     public delegate void OnHitAction(float scoreHit);
     public static event OnHitAction OnHit;
 
+    public enum patterns
+    {
+        Base,
+        Sinus,
+    }
+
+    public patterns pattern;
     // Start is called before the first frame update
     void Start()
     {
         transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        StartCoroutine(falseTime());
     }
 
     // Update is called once per frame
@@ -53,7 +64,7 @@ public class Bullet : MonoBehaviour
 
     private void move()
     {
-        transform.position += new Vector3(m_angle,0.0f,m_direction) * Time.deltaTime * m_bulletSpeed;
+        transform.position += bulletPattern(pattern);
         if (m_MainCamera.WorldToScreenPoint(transform.position).y > m_MainCamera.pixelHeight || m_MainCamera.WorldToScreenPoint(transform.position).y < 0)
         {
             Destroy(gameObject);
@@ -67,7 +78,7 @@ public class Bullet : MonoBehaviour
             //OnHit(collision.gameObject.GetComponent<enemy>().scoreOnHit);
             Destroy(gameObject);
         }
-        
+
     }
 
     public void setOrigine(bool origine)
@@ -78,5 +89,38 @@ public class Bullet : MonoBehaviour
     public bool isFromPlayer()
     {
         return FromPlayer;
+    }
+
+
+    private Vector3 bulletPattern(patterns pattern)
+    {
+        Vector3 res;// = new Vector3(m_angle, 0.0f, m_direction * .7f) * Time.deltaTime * m_bulletSpeed; ;
+
+        switch (pattern)
+        {
+            case patterns.Sinus:
+                res = new Vector3(Mathf.Sin(time * 25), 0.0f, m_direction * .7f) * Time.deltaTime * m_bulletSpeed;
+                return res;
+
+            case patterns.Base:
+                res = new Vector3(m_angle, 0.0f, m_direction * .7f) * Time.deltaTime * m_bulletSpeed;
+                return res;
+
+            default:
+                res = new Vector3(m_angle, 0.0f, m_direction * .7f) * Time.deltaTime * m_bulletSpeed;
+                return res;
+        }
+    }
+
+
+    IEnumerator falseTime()
+    {
+
+        while (isActiveAndEnabled)
+        {
+            time += Time.deltaTime;
+
+            yield return new WaitForEndOfFrame();
+        }
     }
 }

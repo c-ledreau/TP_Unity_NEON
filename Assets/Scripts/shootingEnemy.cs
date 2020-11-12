@@ -12,6 +12,7 @@ public class shootingEnemy : enemy
         m_speedBullet = bullet.getBulletSpeed();
         m_nbrGun = 1;
         m_dmg = 5;
+        explosion = transform.GetComponent<ParticleSystem>();
     }
 
     protected override void Awake()

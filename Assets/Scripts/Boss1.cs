@@ -6,6 +6,10 @@ public class Boss1 : enemy
 {
     private Transform weak1;
     private Transform weak2;
+    [SerializeField]
+    private GameObject las;
+    private LineRenderer m_line;
+    private ParticleSystem m_load;
 
     int dir;
 
@@ -20,14 +24,28 @@ public class Boss1 : enemy
         weak1 = gameObject.transform.GetChild(0);
         weak2 = gameObject.transform.GetChild(1);
         dir = 1;
+        explosion = transform.GetComponent<ParticleSystem>();
+        m_line = las.transform.GetComponent<LineRenderer>();
+        m_load = las.transform.GetComponent<ParticleSystem>();
         //scoreOnDestruct = 500;
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        isDead();
+        if (getCurrentPV() <= m_MaxPV )
+        {
+            StartCoroutine(Death());
+        }
+        //isDead();
+    }
+
+    IEnumerator Death()
+    {
+        m_load.Play();
+        yield return new WaitForSeconds(3);
+        m_line.SetPosition(0, las.transform.position);
+        m_line.SetPosition(1, las.transform.position + new Vector3(0, 0, -100));
     }
 
     override protected void move()
@@ -47,7 +65,7 @@ public class Boss1 : enemy
         }
         else
         {
-            transform.position += Vector3.back * Time.deltaTime;
+            transform.position += Vector3.back * Time.deltaTime*4;
         }
     }
 }

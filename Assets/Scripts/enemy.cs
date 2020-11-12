@@ -10,6 +10,7 @@ public class enemy : Entity
     public Camera m_mainCamera;
     [SerializeField]
     private float scoreOnDestruct = 50;
+    protected ParticleSystem explosion;
 
     [SerializeField]
     private float powSpawnProba = .2f;
@@ -29,6 +30,7 @@ public class enemy : Entity
     // Start is called before the first frame update
     void Start()
     {
+        explosion = transform.GetComponent<ParticleSystem>();
     }
 
     void Update()
@@ -47,8 +49,13 @@ public class enemy : Entity
                 spawn(transform.position);
             }
             OnDestruct(scoreOnDestruct);
-            
-            Destroy(gameObject);
+            explosion.Play();
+            for (int k =0; k< gameObject.transform.childCount; k++)
+                gameObject.transform.GetChild(k).gameObject.SetActive(false);
+            Destroy(transform.GetComponent<MeshRenderer>());
+            Destroy(transform.GetComponent<MeshFilter>());
+            Destroy(transform.GetComponent<Collider>());
+            Destroy(this);
         }
     }
 

@@ -1343,7 +1343,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &293240995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1779,7 +1779,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 415810149}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 20, z: 0}
+  m_LocalPosition: {x: 0, y: 34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4608,7 +4608,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1750426889}
   serializedVersion: 6
-  lengthInSec: 10
+  lengthInSec: 15
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -4683,7 +4683,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 25
+      scalar: 35
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -9266,7 +9266,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1750426889}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: -107.4, z: 83.6}
+  m_LocalPosition: {x: 0, y: -137, z: 106}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -9306,7 +9306,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.04, y: 0.6}
   m_AnchorMax: {x: 0.4, y: 0.75}
-  m_AnchoredPosition: {x: -5.912018, y: 13.204002}
+  m_AnchoredPosition: {x: -5.9120255, y: 13.204002}
   m_SizeDelta: {x: -3.055191, y: -6.338684}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1777840018
@@ -9710,7 +9710,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1942922284
 Transform:
   m_ObjectHideFlags: 0
@@ -9740,7 +9740,7 @@ MonoBehaviour:
   boss1: {fileID: 4338176554443677303, guid: 59242dcafa9d48442924b1b365e72590, type: 3}
   m_spaceship: {fileID: 18592183}
   m_mainCamera: {fileID: 415810151}
-  m_player: {fileID: 0}
+  m_player: {fileID: 18592189}
 --- !u!1 &1958624954
 GameObject:
   m_ObjectHideFlags: 0

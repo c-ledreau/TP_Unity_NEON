@@ -20,9 +20,9 @@ public class enemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //StartCoroutine(Pattern());
-        //StartCoroutine(Alea());
-        StartCoroutine(Moving());
+        StartCoroutine(Pattern());
+        StartCoroutine(Alea());
+        //StartCoroutine(Moving());
         height = m_mainCamera.WorldToScreenPoint(m_spaceship.transform.position).z;
     }
 
