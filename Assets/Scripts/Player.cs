@@ -25,6 +25,8 @@ public class Player : Entity
     [SerializeField]
     private float score = 0;
 
+    public AudioSource AudioSource;
+
     public Bullet.patterns pattern = Bullet.patterns.Base;
 
     float vertical;
@@ -106,6 +108,7 @@ public class Player : Entity
             bullet.m_MainCamera = m_MainCamera;
             for (int k = 0; k < m_nbrGun; k++)
             {
+                AudioSource.Play();
                 Bullet bull;
                 bull = Instantiate(bullet);
                 bull.m_direction = 1.0f;
