@@ -17,11 +17,11 @@ public class rotationBoss : MonoBehaviour
     {
         if (one)
         {
-            transform.Rotate(0, 0.5f, 0);
+            transform.Rotate(0, 0.5f * Time.timeScale, 0);
         }
         else
         {
-            transform.Rotate(0, -1, 0);
+            transform.Rotate(0, -1 * Time.timeScale, 0);
         }
     }
 }

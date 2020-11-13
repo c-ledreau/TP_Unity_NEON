@@ -12,10 +12,12 @@ public class Boss1 : enemy
     private ParticleSystem m_load;
 
     int dir;
+    bool test;
 
     protected override void Awake()
     {
         setCurrentPV(m_MaxPV);
+        test = true;
     }
 
     // Start is called before the first frame update
@@ -33,19 +35,33 @@ public class Boss1 : enemy
     // Update is called once per frame
     void Update()
     {
-        if (getCurrentPV() <= m_MaxPV )
+        if (getCurrentPV() <= m_MaxPV/2)
         {
             StartCoroutine(Death());
         }
-        //isDead();
     }
 
     IEnumerator Death()
     {
         m_load.Play();
         yield return new WaitForSeconds(3);
+        m_load.enableEmission = false;
         m_line.SetPosition(0, las.transform.position);
         m_line.SetPosition(1, las.transform.position + new Vector3(0, 0, -100));
+        RaycastHit hit;
+        if (Physics.Raycast(las.transform.position,las.transform.TransformDirection(Vector3.back), out hit, Mathf.Infinity) && test)
+        {
+            if (hit.collider.gameObject.tag =="Player")
+            {
+                Player pl = hit.collider.transform.GetComponent<Player>();
+                pl.setCurrentPV(pl.getCurrentPV() - 50);
+                pl.UpdateHealthSlider();
+                test = false;
+            }
+        }
+        yield return new WaitForSeconds(3);
+        test = false;
+        m_line.enabled = false;
     }
 
     override protected void move()
@@ -53,11 +69,11 @@ public class Boss1 : enemy
 
         if (m_mainCamera.WorldToScreenPoint(transform.position).y < m_mainCamera.pixelHeight *0.9)
         {
-            if(m_mainCamera.WorldToScreenPoint(transform.position).x < m_mainCamera.pixelWidth * 0.3)
+            if(m_mainCamera.WorldToScreenPoint(transform.position).x < m_mainCamera.pixelWidth * 0.2)
             {
                 dir = 1;
             }
-            if (m_mainCamera.WorldToScreenPoint(transform.position).x > m_mainCamera.pixelWidth * 0.3 + m_mainCamera.pixelWidth * 0.3)
+            if (m_mainCamera.WorldToScreenPoint(transform.position).x > m_mainCamera.pixelWidth * 0.6 + m_mainCamera.pixelWidth * 0.2)
             {
                 dir = -1;
             }
