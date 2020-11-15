@@ -9,6 +9,8 @@ public class ManagerJeu : MonoBehaviour
     private Player player;
     [SerializeField]
     private Text Score;
+    [SerializeField]
+    private Text Score2;
 
     private void Update()
     {
@@ -18,5 +20,6 @@ public class ManagerJeu : MonoBehaviour
     public void scoreUpdate()
     {
         Score.text = player.getScore().ToString();
+        Score2.text = player.getScore().ToString();
     }
 }
