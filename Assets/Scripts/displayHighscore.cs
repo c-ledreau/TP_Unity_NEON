@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class displayHighscore : MonoBehaviour
 {
     public List<TextMeshProUGUI> listWrite;
+    public GameObject uiMain;
+    public GameObject uiHS;
     int k,i;
 
     // Start is called before the first frame update
@@ -24,6 +26,17 @@ public class displayHighscore : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void toHS()
+    {
+        uiMain.SetActive(false);
+        uiHS.SetActive(true);
+    }
+    public void toMain()
+    {
+        uiMain.SetActive(true);
+        uiHS.SetActive(false);
     }
 
     private void displayScore()
