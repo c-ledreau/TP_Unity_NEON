@@ -5,6 +5,8 @@ using UnityEngine;
 public class pause : MonoBehaviour
 {
     private bool isPaused = false;
+    [SerializeField]
+    private GameObject UIPause;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,10 +45,12 @@ public class pause : MonoBehaviour
         if (isPaused)
         {
             Time.timeScale = 0;
+            UIPause.SetActive(true);
         }
         else if (!isPaused)
         {
             Time.timeScale = 1;
+            UIPause.SetActive(false);
         }
     }
 }
