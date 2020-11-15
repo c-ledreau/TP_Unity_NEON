@@ -27197,7 +27197,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4338176554443677298}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.097402, y: 1, z: 23.266493}
+  m_LocalPosition: {x: -4.5881696, y: 1, z: 23.259846}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6012683698595524267}
@@ -27289,6 +27289,8 @@ MonoBehaviour:
   scoreOnDestruct: 500
   powSpawnProba: 1
   las: {fileID: 548281952608382262}
+  lazer: {fileID: 0}
+  toto: 0
 --- !u!198 &5085129359790548777
 ParticleSystem:
   m_ObjectHideFlags: 0
