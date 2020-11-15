@@ -10,6 +10,10 @@ public class Boss1 : enemy
     private GameObject las;
     private LineRenderer m_line;
     private ParticleSystem m_load;
+    [SerializeField]
+    private AudioSource lazer;
+
+    public bool toto = false;
 
     int dir;
     bool test;
@@ -18,6 +22,7 @@ public class Boss1 : enemy
     {
         setCurrentPV(m_MaxPV);
         test = true;
+        lazer = GameObject.FindGameObjectWithTag("bossMaterial").GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
@@ -44,7 +49,8 @@ public class Boss1 : enemy
     IEnumerator Death()
     {
         m_load.Play();
-        yield return new WaitForSeconds(3);
+        lazer.Play();
+        yield return new WaitForSeconds(3.5f);
         m_load.enableEmission = false;
         m_line.SetPosition(0, las.transform.position);
         m_line.SetPosition(1, las.transform.position + new Vector3(0, 0, -100));
@@ -82,6 +88,15 @@ public class Boss1 : enemy
         else
         {
             transform.position += Vector3.back * Time.deltaTime*4;
+        }
+    }
+
+    private void testSon()
+    {
+        if(toto)
+        {
+            lazer.Play();
+            toto = false;
         }
     }
 }

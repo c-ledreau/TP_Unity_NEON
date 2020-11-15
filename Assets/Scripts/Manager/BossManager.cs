@@ -19,6 +19,9 @@ public class BossManager : MonoBehaviour
     private TextMeshProUGUI m_alert;
     bool isPoped;
 
+    [SerializeField]
+    private AudioSource m_alarme;
+
     private float height;
     // Start is called before the first frame update
     void Start()
@@ -44,15 +47,16 @@ public class BossManager : MonoBehaviour
         //end spawn enemy
         m_enemyManager.SetActive(false);
         m_alert.gameObject.SetActive(true);
-        for (int k = 0; k < 2; k++)
+        m_alarme.Play();
+        for (int k = 0; k < 4; k++)
         {
             m_alert.CrossFadeAlpha(1.0f, 0.5f, false);
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.86f);
             m_alert.CrossFadeAlpha(0.0f, 0.5f, false);
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.86f);
         }
 
-        yield return new WaitForSeconds(3);
+        //yield return new WaitForSeconds(.5f);
         //text appears
             //spawn boss1
 
