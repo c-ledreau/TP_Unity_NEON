@@ -99,7 +99,7 @@ public class Bullet : MonoBehaviour
         switch (pattern)
         {
             case patterns.Sinus:
-                res = new Vector3(Mathf.Sin(time * 25), 0.0f, m_direction * .7f) * Time.deltaTime * m_bulletSpeed;
+                res = new Vector3(m_angle + Mathf.Sin(time * 25), 0.0f, m_direction * .7f) * Time.deltaTime * m_bulletSpeed;
                 return res;
 
             case patterns.Base:
