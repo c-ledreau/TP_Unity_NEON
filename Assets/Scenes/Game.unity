@@ -520,6 +520,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 132173770}
+  - component: {fileID: 132173771}
   m_Layer: 0
   m_Name: manager
   m_TagString: Untagged
@@ -549,6 +550,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &132173771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132173769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 767a5915ba147a245805c8dfed2bce5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_enemyManager: {fileID: 293240995}
 --- !u!1 &160280454
 GameObject:
   m_ObjectHideFlags: 0
@@ -9486,7 +9500,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.04, y: 0.6}
   m_AnchorMax: {x: 0.4, y: 0.75}
-  m_AnchoredPosition: {x: -5.9120255, y: 13.204002}
+  m_AnchoredPosition: {x: -5.912018, y: 13.204002}
   m_SizeDelta: {x: -3.055191, y: -6.338684}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1777840018
@@ -10158,6 +10172,7 @@ MonoBehaviour:
   m_enemyManager: {fileID: 293240994}
   m_alert: {fileID: 1901713389}
   m_alarme: {fileID: 2073363914}
+  m_scoreForBoss: 100
 --- !u!1 &1958624954
 GameObject:
   m_ObjectHideFlags: 0

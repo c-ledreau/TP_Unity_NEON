@@ -22,10 +22,14 @@ public class BossManager : MonoBehaviour
     [SerializeField]
     private AudioSource m_alarme;
 
+    [SerializeField]
+    private float m_scoreForBoss = 100;
+
     private float height;
     // Start is called before the first frame update
     void Start()
     {
+        Boss1.Udead += newBoss;
         isPoped = false;
         m_alert.gameObject.SetActive(true);
         m_alert.CrossFadeAlpha(0.0f, 0, false);
@@ -34,7 +38,7 @@ public class BossManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_player.getScore() >= 100 && !isPoped)
+        if (m_player.getScore() >= m_scoreForBoss && !isPoped)
         {
             Debug.Log(m_player.getScore());
             StartCoroutine(PopBoss1());
@@ -67,4 +71,12 @@ public class BossManager : MonoBehaviour
         boss1.transform.position = bossPos;
         Instantiate(boss1);
     }
+
+    private void newBoss()
+    {
+        m_scoreForBoss = m_player.getScore() + 3000;
+        isPoped = false;
+    }
+
+
 }

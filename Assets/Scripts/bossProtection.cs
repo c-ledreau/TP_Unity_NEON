@@ -48,7 +48,7 @@ public class bossProtection : enemy
         {
             res = m_time;
             m_time += Time.deltaTime;
-            if (Mathf.Sin(m_time) * m_sinIntensity < Mathf.Sin(res) * m_sinIntensity)
+            if (Mathf.Sin(m_time) * m_sinIntensity > 0)// Mathf.Sin(res) * m_sinIntensity)
             {
                 m_trailLeft.gameObject.SetActive(true);
                 m_trailRight.gameObject.SetActive(false);

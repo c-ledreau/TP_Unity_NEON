@@ -38,7 +38,7 @@ public class enemy : Entity
        
     }
 
-    protected void isDead()
+    protected virtual void isDead()
     {
         if (getCurrentPV() <= 0)
         {

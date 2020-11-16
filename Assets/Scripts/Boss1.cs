@@ -12,8 +12,13 @@ public class Boss1 : enemy
     private ParticleSystem m_load;
     [SerializeField]
     private AudioSource lazer;
+    [SerializeField]
+    private managerManager m_Manager;
 
     public bool toto = false;
+
+    public delegate void BossDeath();
+    public static event BossDeath Udead;
 
     int dir;
     bool test;
@@ -23,6 +28,7 @@ public class Boss1 : enemy
         setCurrentPV(m_MaxPV);
         test = true;
         lazer = GameObject.FindGameObjectWithTag("bossMaterial").GetComponent<AudioSource>();
+        m_Manager = FindObjectOfType<managerManager>();
     }
 
     // Start is called before the first frame update
@@ -40,16 +46,19 @@ public class Boss1 : enemy
     // Update is called once per frame
     void Update()
     {
-        if (getCurrentPV() <= m_MaxPV/2)
+        if ((getCurrentPV() <= m_MaxPV/2 )&& !toto)
         {
+            toto = true;
             StartCoroutine(Death());
         }
+        isDead();
     }
 
     IEnumerator Death()
     {
         m_load.Play();
         lazer.Play();
+        Debug.Log("enter death coroutine");
         yield return new WaitForSeconds(3.5f);
         m_load.enableEmission = false;
         m_line.SetPosition(0, las.transform.position);
@@ -98,5 +107,20 @@ public class Boss1 : enemy
             lazer.Play();
             toto = false;
         }
+    }
+
+    protected override void  isDead()
+    {
+        if (getCurrentPV() <= 0)
+        {
+            Udead();
+            m_Manager.m_enemyManager.gameObject.SetActive(true);
+            m_Manager.m_enemyManager.Launch();
+            if (lazer.isPlaying)
+            {
+                lazer.Stop();
+            }
+        }
+        base.isDead();
     }
 }
