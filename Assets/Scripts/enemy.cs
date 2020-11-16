@@ -46,7 +46,8 @@ public class enemy : Entity
             if (powSpawnProba*100 >= toto)
             {
                 //Debug.Log(toto);
-                spawn(transform.position);
+
+                StartCoroutine(poweru());
             }
             OnDestruct(scoreOnDestruct);
             explosion.Play();
@@ -55,15 +56,19 @@ public class enemy : Entity
             Destroy(transform.GetComponent<MeshRenderer>());
             Destroy(transform.GetComponent<MeshFilter>());
             Destroy(transform.GetComponent<Collider>());
-            StartCoroutine(Wait());
-
+            StartCoroutine(Destroy());
         }
     }
 
-    IEnumerator Wait()
+    IEnumerator Destroy()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(0.40f);
         Destroy(gameObject);
+    }
+    IEnumerator poweru()
+    {
+        yield return new WaitForSeconds(0.40f);
+        spawn(transform.position);
     }
 
     // Update is called once per frame

@@ -46,7 +46,7 @@ public class Boss1 : enemy
     // Update is called once per frame
     void Update()
     {
-        if ((getCurrentPV() <= m_MaxPV/2 )&& !toto)
+        if ((getCurrentPV() <= m_MaxPV/2 ))
         {
             toto = true;
             StartCoroutine(Death());
