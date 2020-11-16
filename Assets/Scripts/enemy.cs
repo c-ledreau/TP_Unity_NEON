@@ -55,8 +55,15 @@ public class enemy : Entity
             Destroy(transform.GetComponent<MeshRenderer>());
             Destroy(transform.GetComponent<MeshFilter>());
             Destroy(transform.GetComponent<Collider>());
-            Destroy(this);
+            StartCoroutine(Wait());
+
         }
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(5);
+        Destroy(gameObject);
     }
 
     // Update is called once per frame
