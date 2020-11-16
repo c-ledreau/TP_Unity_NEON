@@ -61,20 +61,27 @@ public class Boss1 : enemy
         Debug.Log("enter death coroutine");
         yield return new WaitForSeconds(3.5f);
         m_load.enableEmission = false;
-        m_line.SetPosition(0, las.transform.position);
-        m_line.SetPosition(1, las.transform.position + new Vector3(0, 0, -100));
-        RaycastHit hit;
-        if (Physics.Raycast(las.transform.position,las.transform.TransformDirection(Vector3.back), out hit, Mathf.Infinity) && test)
+        float laserTime = 0;
+        
+        while(laserTime < 3)
         {
-            if (hit.collider.gameObject.tag =="Player")
+            laserTime += Time.deltaTime;
+            m_line.SetPosition(0, las.transform.position);
+            m_line.SetPosition(1, las.transform.position + new Vector3(0, 0, -100));
+            RaycastHit hit;
+            if (Physics.Raycast(las.transform.position, las.transform.TransformDirection(Vector3.back), out hit, Mathf.Infinity) && test)
             {
-                Player pl = hit.collider.transform.GetComponent<Player>();
-                pl.setCurrentPV(pl.getCurrentPV() - 50);
-                pl.UpdateHealthSlider();
-                test = false;
+                if (hit.collider.gameObject.tag == "Player")
+                {
+                    Player pl = hit.collider.transform.GetComponent<Player>();
+                    pl.setCurrentPV(pl.getCurrentPV() - 50);
+                    pl.UpdateHealthSlider();
+                    test = false;
+                }
             }
+            yield return new WaitForEndOfFrame();
         }
-        yield return new WaitForSeconds(3);
+        
         test = false;
         m_line.enabled = false;
     }
@@ -100,26 +107,22 @@ public class Boss1 : enemy
         }
     }
 
-    private void testSon()
-    {
-        if(toto)
-        {
-            lazer.Play();
-            toto = false;
-        }
-    }
+
+    private bool réparerLesBétisesDeClément = true;
 
     protected override void  isDead()
     {
-        if (getCurrentPV() <= 0)
+        if (getCurrentPV() <= 0 && réparerLesBétisesDeClément)
         {
             Udead();
             m_Manager.m_enemyManager.gameObject.SetActive(true);
             m_Manager.m_enemyManager.Launch();
+            Debug.Log("est ce que ça boucle ?");
             if (lazer.isPlaying)
             {
                 lazer.Stop();
             }
+            réparerLesBétisesDeClément = false;
         }
         base.isDead();
     }

@@ -42,6 +42,7 @@ public class enemy : Entity
     {
         if (getCurrentPV() <= 0)
         {
+<<<<<<< Updated upstream
             float toto = Random.Range(0, 101);
             if (powSpawnProba*100 >= toto)
             {
@@ -49,6 +50,9 @@ public class enemy : Entity
 
                 StartCoroutine(poweru());
             }
+=======
+            
+>>>>>>> Stashed changes
             OnDestruct(scoreOnDestruct);
             explosion.Play();
             for (int k =0; k< gameObject.transform.childCount; k++)
@@ -62,7 +66,17 @@ public class enemy : Entity
 
     IEnumerator Destroy()
     {
+<<<<<<< Updated upstream
         yield return new WaitForSeconds(0.40f);
+=======
+        yield return new WaitForSeconds(.5f);
+        float toto = Random.Range(0, 101);
+        if (powSpawnProba * 100 >= toto)
+        {
+            //Debug.Log(toto);
+            spawn(transform.position);
+        }
+>>>>>>> Stashed changes
         Destroy(gameObject);
     }
     IEnumerator poweru()
@@ -103,6 +117,7 @@ public class enemy : Entity
             }
             Destroy(bull.gameObject);
         }
+        Debug.Log("test collision");
         isDead();
     }
 }
