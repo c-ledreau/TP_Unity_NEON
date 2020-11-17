@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// editor scripts that manage unity
+/// editor scripts that manage unity, necessarily in an editor folder
 /// </summary>
 public class ScenesManager : EditorWindow
 {
@@ -72,6 +72,9 @@ public class ScenesManager : EditorWindow
         GUILayout.EndVertical();
     }
 
+    /// <summary>
+    /// allows th user to easily add a scene to the build editor
+    /// </summary>
     [MenuItem("Assets/Scene/Add to build", false)]
     static  void AddToBuild()
     {
@@ -110,6 +113,9 @@ public class ScenesManager : EditorWindow
         return false;
     }
 
+    /// <summary>
+    /// refresh the content of the list
+    /// </summary>
     void refreshContent()
     {
         listScene.Clear();
@@ -125,6 +131,9 @@ public class ScenesManager : EditorWindow
     }
 }
 
+/// <summary>
+/// class that describe a scene
+/// </summary>
 public class SceneData
 {
     public string m_name;

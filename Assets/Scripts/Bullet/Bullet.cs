@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// handles the behaviour of the bullet
+/// </summary>
 public class Bullet : MonoBehaviour
 {
     [SerializeField]
-    private float m_bulletSpeed;
+    private float m_bulletSpeed; //speed of the bullet
     [SerializeField]
     public Camera m_MainCamera;
     public float m_angle;
     [SerializeField]
-    private int m_damage = 5;
-    public float m_direction;
+    private int m_damage = 5; //damage of the bullet
+    public float m_direction; //direction of the bullet
 
     private bool FromPlayer;
 
@@ -22,6 +25,7 @@ public class Bullet : MonoBehaviour
     public delegate void OnHitAction(float scoreHit);
     public static event OnHitAction OnHit;
 
+    //pattern of the bullets
     public enum patterns
     {
         Base,
@@ -62,6 +66,9 @@ public class Bullet : MonoBehaviour
         return m_damage;
     }
 
+    /// <summary>
+    /// manages the movement of the bullet, regarding if it is shot by an enemy or the player
+    /// </summary>
     private void move()
     {
         transform.position += bulletPattern(pattern);
@@ -91,7 +98,11 @@ public class Bullet : MonoBehaviour
         return FromPlayer;
     }
 
-
+    /// <summary>
+    /// define the pattern of the bullt
+    /// </summary>
+    /// <param name="pattern">Sinus or Base</param>
+    /// <returns></returns>
     private Vector3 bulletPattern(patterns pattern)
     {
         Vector3 res;// = new Vector3(m_angle, 0.0f, m_direction * .7f) * Time.deltaTime * m_bulletSpeed; ;
