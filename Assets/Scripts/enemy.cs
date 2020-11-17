@@ -25,6 +25,8 @@ public class enemy : Entity
     public static event SpamwPowAction spawn;
 
 
+    private bool ClémentIlFautMettreDesConditionsPlusStrictes = false;
+
     protected override void Awake()
     {
         setCurrentPV(m_MaxPV);
@@ -46,15 +48,10 @@ public class enemy : Entity
     /// </summary>
     protected virtual void isDead()
     {
-        if (getCurrentPV() <= 0)
+        if ((getCurrentPV() <= 0) && !ClémentIlFautMettreDesConditionsPlusStrictes)
         {
-            float toto = Random.Range(0, 101);
-            if (powSpawnProba*100 >= toto) //handle the spawn of a powerUp in a coroutine
-            {
-                //Debug.Log(toto);
-
-                StartCoroutine(poweru());
-            }
+            ClémentIlFautMettreDesConditionsPlusStrictes = true;
+            
             OnDestruct(scoreOnDestruct);
             explosion.Play(); //play the explosion
             for (int k =0; k< gameObject.transform.childCount; k++) //delete all children of the enemy
@@ -62,6 +59,7 @@ public class enemy : Entity
             Destroy(transform.GetComponent<MeshRenderer>());
             Destroy(transform.GetComponent<MeshFilter>());
             Destroy(transform.GetComponent<Collider>());
+            //Destroy(gameObject);
             StartCoroutine(Destroy());
         }
     }
@@ -72,6 +70,13 @@ public class enemy : Entity
     IEnumerator Destroy()
     {
         yield return new WaitForSeconds(0.40f);
+        float toto = Random.Range(0, 101);
+        if (powSpawnProba * 100 >= toto) //handle the spawn of a powerUp in a coroutine
+        {
+            //Debug.Log(toto);
+            spawn(transform.position);
+            //StartCoroutine(poweru());
+        }
         Destroy(gameObject);
     }
 
