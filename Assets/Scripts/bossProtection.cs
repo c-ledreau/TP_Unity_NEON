@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This class describe the boss protections behaviour 
+/// </summary>
 public class bossProtection : enemy
 {
-    private float m_time = 0;
-    public bool m_positive;
+    private float m_time = 0; //local time used in the coroutine
+    public bool m_positive; // define if the protection goes first on the right or the left
     [SerializeField]
-    private float m_sinIntensity = 20;
+    private float m_sinIntensity = 20; // sinusoidal movment intensity
 
-    // if true, left trail activated, if false, right trail activated
-    private bool m_trail;
+    private bool m_trail; // if true, left trail activated, if false, right trail activated
+
+    // trailRenderers of the rockets
     [SerializeField]
-    private TrailRenderer m_trailLeft;
+    private TrailRenderer m_trailLeft; 
     [SerializeField]
     private TrailRenderer m_trailRight;
 
@@ -28,6 +32,10 @@ public class bossProtection : enemy
         
     }
 
+
+    /// <summary>
+    /// sinusoidal movment on the x axis, if m_positive it goes first on the right else on the left
+    /// </summary>
     override protected void move()
     {
         
@@ -41,6 +49,11 @@ public class bossProtection : enemy
         }
     }
 
+
+    /// <summary>
+    /// alow the protections to use the same time an activate the trail on the left or right rocket
+    /// </summary>
+    /// <returns></returns>
     IEnumerator falseTime()
     {
         float res = 0;
@@ -48,7 +61,7 @@ public class bossProtection : enemy
         {
             res = m_time;
             m_time += Time.deltaTime;
-            if (Mathf.Sin(m_time) * m_sinIntensity >    0)// Mathf.Sin(res) * m_sinIntensity)
+            if (Mathf.Sin(m_time) * m_sinIntensity > 0)
             {
                 m_trailLeft.gameObject.SetActive(true);
                 m_trailRight.gameObject.SetActive(false);

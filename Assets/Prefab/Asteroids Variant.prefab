@@ -14,27 +14,6 @@ CapsuleCollider:
   m_Height: 3.75
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0.2}
---- !u!114 &8515507979577212552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6440264996533219059}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0f41361e15807b4eb3b2b446db026b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MaxPV: 0
-  m_nbrGun: 0
-  m_fireRate: 0
-  bullet: {fileID: 0}
-  CurrentPV: 0
-  m_enemySpeed: 0
-  m_mainCamera: {fileID: 0}
-  scoreOnDestruct: 50
-  powSpawnProba: 0.2
 --- !u!114 &8817673153107270370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54,7 +33,7 @@ MonoBehaviour:
   CurrentPV: 0
   m_enemySpeed: 0
   m_mainCamera: {fileID: 0}
-  scoreOnDestruct: 50
+  scoreOnDestruct: 0
   powSpawnProba: 0.2
   m_positive: 0
   m_sinIntensity: 3
