@@ -4,9 +4,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// display the highscore of this game in the highscore menu, use of PlayerPrefs
+/// </summary>
+
 public class displayHighscore : MonoBehaviour
 {
-    public List<TextMeshProUGUI> listWrite;
+    public List<TextMeshProUGUI> listWrite; //list of the texts to display the scores
 
     int k,i;
 
@@ -15,7 +19,11 @@ public class displayHighscore : MonoBehaviour
     {
         displayScore();
     }
-    public void resetScore()
+
+    /// <summary>
+    /// reset the scores 
+    /// </summary>
+    public void resetScore() 
     {
         PlayerPrefs.DeleteAll();
         displayScore();

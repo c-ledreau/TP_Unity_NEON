@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
+/// <summary>
+/// this class describe the behavior of the enemies that shoot
+/// </summary>
 public class shootingEnemy : enemy
 {
     protected Stopwatch stopwatch;
     // Start is called before the first frame update
-    void Start()
+    void Start() //initialization of its features
     {
         m_speedBullet = bullet.getBulletSpeed();
         m_nbrGun = 1;
@@ -15,7 +18,7 @@ public class shootingEnemy : enemy
         explosion = transform.GetComponent<ParticleSystem>();
     }
 
-    protected override void Awake()
+    protected override void Awake()//initialization of its features
     {
         setCurrentPV(m_MaxPV);
         stopwatch = new Stopwatch();
@@ -28,12 +31,15 @@ public class shootingEnemy : enemy
         shootingControl();
     }
 
+    /// <summary>
+    /// handles the shooting behavior of the shooting enemy
+    /// </summary>
     protected void shootingControl()
     {
-        if (stopwatch.Elapsed.TotalMilliseconds*Time.timeScale >= 1000 / m_fireRate)
+        if (stopwatch.Elapsed.TotalMilliseconds*Time.timeScale >= 1000 / m_fireRate) 
         {
             bullet.m_MainCamera = m_mainCamera;
-            for (int k = 0; k < m_nbrGun; k++)
+            for (int k = 0; k < m_nbrGun; k++)//define the characteritics of the shots
             {
                 Bullet bull;
                 bull = Instantiate(bullet);

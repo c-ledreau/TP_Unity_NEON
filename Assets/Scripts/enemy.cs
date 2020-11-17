@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// this class describe the behavior of the enemies
+/// </summary>
 public class enemy : Entity
 {
     [SerializeField]
-    private float m_enemySpeed;
+    private float m_enemySpeed; //the speed of the enemy
     [SerializeField]
-    public Camera m_mainCamera;
+    public Camera m_mainCamera; //the camera of the enemy
     [SerializeField]
-    private float scoreOnDestruct = 50;
-    protected ParticleSystem explosion;
+    private float scoreOnDestruct = 50; //the score the enemy gives the player if it is detroy
+    protected ParticleSystem explosion; //the explosion for the death of the enemy
 
     [SerializeField]
-    private float powSpawnProba = .2f;
+    private float powSpawnProba = .2f; //the probability the enemy has to drop a powerUp
 
     public delegate void OnHitAction(float addedScore);
     public static event OnHitAction OnDestruct;
@@ -37,25 +40,24 @@ public class enemy : Entity
     {
        
     }
-
+    /// <summary>
+    /// handle the death of the enemy
+    /// We use coroutines in order to see the particle system attached to the enemy
+    /// </summary>
     protected virtual void isDead()
     {
         if (getCurrentPV() <= 0)
         {
-<<<<<<< Updated upstream
             float toto = Random.Range(0, 101);
-            if (powSpawnProba*100 >= toto)
+            if (powSpawnProba*100 >= toto) //handle the spawn of a powerUp in a coroutine
             {
                 //Debug.Log(toto);
 
                 StartCoroutine(poweru());
             }
-=======
-            
->>>>>>> Stashed changes
             OnDestruct(scoreOnDestruct);
-            explosion.Play();
-            for (int k =0; k< gameObject.transform.childCount; k++)
+            explosion.Play(); //play the explosion
+            for (int k =0; k< gameObject.transform.childCount; k++) //delete all children of the enemy
                 gameObject.transform.GetChild(k).gameObject.SetActive(false);
             Destroy(transform.GetComponent<MeshRenderer>());
             Destroy(transform.GetComponent<MeshFilter>());
@@ -64,21 +66,18 @@ public class enemy : Entity
         }
     }
 
+    /// <summary>
+    ///  destroy the enemy after 0.4 second
+    /// </summary>
     IEnumerator Destroy()
     {
-<<<<<<< Updated upstream
         yield return new WaitForSeconds(0.40f);
-=======
-        yield return new WaitForSeconds(.5f);
-        float toto = Random.Range(0, 101);
-        if (powSpawnProba * 100 >= toto)
-        {
-            //Debug.Log(toto);
-            spawn(transform.position);
-        }
->>>>>>> Stashed changes
         Destroy(gameObject);
     }
+
+    /// <summary>
+    /// Spawn a power up after 0.4 second
+    /// </summary>
     IEnumerator poweru()
     {
         yield return new WaitForSeconds(0.40f);
@@ -91,6 +90,9 @@ public class enemy : Entity
         move();
     }
 
+    /// <summary>
+    /// make move the enemy to the bottom of the screen and destrroys it when it is out of the range of the camera
+    /// </summary>
     virtual protected void move()
     {
         transform.position += Vector3.back * Time.deltaTime * m_enemySpeed;
@@ -102,12 +104,12 @@ public class enemy : Entity
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player") //the enemy is destroyed if is touches the player
         {
             setCurrentPV(getCurrentPV() - 100);
         }
 
-        if (collision.gameObject.tag == "bullet")
+        if (collision.gameObject.tag == "bullet") //the enemy lost some HP regarding the damage of the bullet it collided with, then detroyed this bullet
         {
             Bullet bull = collision.gameObject.GetComponent<Bullet>();
             if (bull.isFromPlayer())
@@ -117,7 +119,6 @@ public class enemy : Entity
             }
             Destroy(bull.gameObject);
         }
-        Debug.Log("test collision");
         isDead();
     }
 }

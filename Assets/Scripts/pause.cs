@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// handles the pause eventn accessible by pressing escape or by clicking the pause button
+/// </summary>
 public class pause : MonoBehaviour
 {
-    private bool isPaused = false;
+    private bool isPaused = false; //the boolean that switches the pause UI
     [SerializeField]
-    private GameObject UIPause;
+    private GameObject UIPause; //the UI to activate
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +17,9 @@ public class pause : MonoBehaviour
     }
 
     // Update is called once per frame
+    /// <summary>
+    /// pressing escape in the update function switch the state of isPaused
+    /// </summary>
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && !isPaused)
@@ -28,6 +34,9 @@ public class pause : MonoBehaviour
         performPause();
     }
 
+    /// <summary>
+    /// this function is called by clicking the pause button
+    /// </summary>
     public void setPause()
     {
         if (!isPaused)
@@ -40,6 +49,9 @@ public class pause : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// pause the game regarding the state of isPaused
+    /// </summary>
     public void performPause()
     {
         if (isPaused)

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// make the 2 parts of the boss rotates
+/// </summary>
 public class rotationBoss : MonoBehaviour
 {
     [SerializeField]

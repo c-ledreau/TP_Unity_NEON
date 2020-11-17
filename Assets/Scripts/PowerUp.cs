@@ -5,7 +5,7 @@ using UnityEngine;
 public class PowerUp : MonoBehaviour
 {
     [SerializeField]
-    private float m_powerUpSpeed;
+    private float m_powerUpSpeed;//the speed of the powerUp
 
     public Camera m_mainCamera;
     public Player m_spaceShip;
@@ -14,7 +14,7 @@ public class PowerUp : MonoBehaviour
     public delegate void PowerTake(powTypes pow);
     public static event PowerTake getPow;
 
-    public enum powTypes
+    public enum powTypes //enum of the different powerUp
     {
         fireRate,
         bulletSpeed,
@@ -35,6 +35,9 @@ public class PowerUp : MonoBehaviour
         move();
     }
 
+    /// <summary>
+    /// handles the movement of the powerUps
+    /// </summary>
     private void move()
     {
         transform.position += Vector3.back * Time.deltaTime * m_powerUpSpeed;
@@ -44,6 +47,9 @@ public class PowerUp : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// starts the powerUp(à fucntion when the player hits a powerUp
+    /// </summary>
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -51,7 +57,9 @@ public class PowerUp : MonoBehaviour
             powerUp();
         }
     }
-
+    /// <summary>
+    /// set a random powerUp to the player 
+    /// </summary>
     void powerUp()
     {
         powTypes pow = powTypes.score;

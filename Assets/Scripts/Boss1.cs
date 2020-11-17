@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// this class describe the behavior of the first (and for now only) boss
+/// </summary>
 public class Boss1 : enemy
 {
-    private Transform weak1;
-    private Transform weak2;
+    private Transform weak1; // the first weakness of the boss 
+    private Transform weak2; // the first weakness of the boss 
     [SerializeField]
-    private GameObject las;
-    private LineRenderer m_line;
-    private ParticleSystem m_load;
+    private GameObject las; //the gameObject that emits the lazer
+    private LineRenderer m_line; //the line that render the lazer
+    private ParticleSystem m_load; //the Particlesystem taht render the loading of the lazer
     [SerializeField]
-    private AudioSource lazer;
+    private AudioSource lazer; //the audio of the lazer
     [SerializeField]
-    private managerManager m_Manager;
+    private managerManager m_Manager; //manages the steps
 
     public bool toto = false;
 
@@ -23,7 +26,7 @@ public class Boss1 : enemy
     int dir;
     bool test;
 
-    protected override void Awake()
+    protected override void Awake() //initialization of its features
     {
         setCurrentPV(m_MaxPV);
         test = true;
@@ -32,7 +35,7 @@ public class Boss1 : enemy
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Start() //initialization of its features
     {
         weak1 = gameObject.transform.GetChild(0);
         weak2 = gameObject.transform.GetChild(1);
@@ -46,7 +49,7 @@ public class Boss1 : enemy
     // Update is called once per frame
     void Update()
     {
-        if ((getCurrentPV() <= m_MaxPV/2 ))
+        if ((getCurrentPV() <= m_MaxPV/2 )) // checks when to activate the lazer
         {
             toto = true;
             StartCoroutine(Death());
@@ -54,24 +57,24 @@ public class Boss1 : enemy
         isDead();
     }
 
-    IEnumerator Death()
+    IEnumerator Death() //coroutine that start the lazer process
     {
-        m_load.Play();
-        lazer.Play();
+        m_load.Play(); //start the particle system
+        lazer.Play(); //start the sound of the lazer
         Debug.Log("enter death coroutine");
         yield return new WaitForSeconds(3.5f);
-        m_load.enableEmission = false;
+        m_load.enableEmission = false;  //end the particle system
         float laserTime = 0;
         
         while(laserTime < 3)
         {
             laserTime += Time.deltaTime;
-            m_line.SetPosition(0, las.transform.position);
-            m_line.SetPosition(1, las.transform.position + new Vector3(0, 0, -100));
+            m_line.SetPosition(0, las.transform.position);                          //set the positions of the lazer
+            m_line.SetPosition(1, las.transform.position + new Vector3(0, 0, -100));//
             RaycastHit hit;
             if (Physics.Raycast(las.transform.position, las.transform.TransformDirection(Vector3.back), out hit, Mathf.Infinity) && test)
             {
-                if (hit.collider.gameObject.tag == "Player")
+                if (hit.collider.gameObject.tag == "Player")//checks if the lazer hit the hit, if yes, removes it 50 HP
                 {
                     Player pl = hit.collider.transform.GetComponent<Player>();
                     pl.setCurrentPV(pl.getCurrentPV() - 50);
@@ -83,13 +86,15 @@ public class Boss1 : enemy
         }
         
         test = false;
-        m_line.enabled = false;
+        m_line.enabled = false; //disable the line renderer
     }
 
+    /// <summary>
+    /// describe the movement of the boss,
+    /// </summary>
     override protected void move()
     {
-
-        if (m_mainCamera.WorldToScreenPoint(transform.position).y < m_mainCamera.pixelHeight *0.9)
+        if (m_mainCamera.WorldToScreenPoint(transform.position).y < m_mainCamera.pixelHeight *0.9) //then it goes right and left
         {
             if(m_mainCamera.WorldToScreenPoint(transform.position).x < m_mainCamera.pixelWidth * 0.2)
             {
@@ -101,14 +106,14 @@ public class Boss1 : enemy
             }
             transform.position += Vector3.right * Time.deltaTime * 5 * dir;
         }
-        else
+        else // it first goes back until it reaches 90% of the screen
         {
             transform.position += Vector3.back * Time.deltaTime*4;
         }
     }
 
 
-    private bool réparerLesBétisesDeClément = true;
+    private bool réparerLesBétisesDeClément = true; // well...
 
     protected override void  isDead()
     {

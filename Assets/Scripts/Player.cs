@@ -4,15 +4,18 @@ using UnityEngine;
 using System.Diagnostics;
 using UnityEngine.UI;
 
+/// <summary>
+/// descriibes the behaviour of the boss
+/// </summary>
 public class Player : Entity
 {
     [SerializeField]
-    private Camera m_MainCamera;
-    public float m_VerticalSpeed;
-    public float m_HorizontalSpeed;
+    private Camera m_MainCamera; //set the camera of the player 
+    public float m_VerticalSpeed; //set the vertical speed of the player 
+    public float m_HorizontalSpeed; //set the horizontal speed of the player 
     Stopwatch stopwatch;
     [SerializeField]
-    private Image image;
+    private Image image; 
     private TrailRenderer line;
 
     //interface membrers
@@ -32,7 +35,7 @@ public class Player : Entity
     float vertical;
     private Rigidbody rb;
 
-    protected override void Awake()
+    protected override void Awake()//initialization of its features
     {
         stopwatch = new Stopwatch();
         stopwatch.Start();
@@ -45,7 +48,7 @@ public class Player : Entity
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Start()//initialization of its features
     {
         image.gameObject.SetActive(false);
         m_speedBullet = bullet.getBulletSpeed();
@@ -58,7 +61,7 @@ public class Player : Entity
 
     void Update()
     {
-        if (getCurrentPV() <= 0)
+        if (getCurrentPV() <= 0) // if the player has no more HP, destroys it and set the pause on
         {
             Destroy(gameObject);
             image.gameObject.SetActive(true);
@@ -72,21 +75,28 @@ public class Player : Entity
         Trail();
     }
 
+    /// <summary>
+    /// handle the movement of the trail
+    /// </summary>
     void Trail()
     {
         for (int k = 1; k < line.positionCount; k++)
         {
-            line.SetPosition(k, line.GetPosition(k) + Vector3.back * 0.3f);
+            line.SetPosition(k, line.GetPosition(k) + Vector3.back * 0.3f); // set an offset of the trail to make look like the player is moving a lot through space (it is actuallu almost motionless)
         }
     }
 
+    /// <summary>
+    /// movement of the player
+    /// </summary>
     void PlayerControl()
     {
         Vector3 screenPos = m_MainCamera.WorldToScreenPoint(transform.position);
         float mH = Input.GetAxis("Horizontal");
         float mV = Input.GetAxis("Vertical");
-        rb.velocity = new Vector3(mH * m_HorizontalSpeed, 0, mV * m_VerticalSpeed + 0.5f);
+        rb.velocity = new Vector3(mH * m_HorizontalSpeed, 0, mV * m_VerticalSpeed + 0.5f); //set the velocity of the player, regarding the keys pressed
 
+        //start : force the player to stay in front of the camera
         if (screenPos.x < 0)
         {
             rb.velocity = new Vector3(1, 0, 0);
@@ -103,7 +113,9 @@ public class Player : Entity
         {
             rb.velocity = new Vector3(0, 0, 1);
         }
-        if (Input.GetKey(KeyCode.Space) && stopwatch.Elapsed.TotalMilliseconds >= 1000 / m_fireRate)
+        //end : force the player to stay in front of the camera
+
+        if (Input.GetKey(KeyCode.Space) && stopwatch.Elapsed.TotalMilliseconds >= 1000 / m_fireRate)//define the characteritics of the shots
         {
             bullet.m_MainCamera = m_MainCamera;
             for (int k = 0; k < m_nbrGun; k++)
@@ -131,18 +143,18 @@ public class Player : Entity
     void OnCollisionEnter(Collision collision)
     {
 
-        if (collision.gameObject.tag == "enemy")
+        if (collision.gameObject.tag == "enemy") //looses 20 HP if the player collides with an enemy
         {
             setCurrentPV(getCurrentPV() - 20);
             UpdateHealthSlider();
         }
 
-        if (collision.gameObject.tag == "PowerUp")
+        if (collision.gameObject.tag == "PowerUp")//destroy the power if it collides with the player
         {
             Destroy(collision.gameObject);
         }
 
-        if (collision.gameObject.tag == "bullet")
+        if (collision.gameObject.tag == "bullet") //the player looses the damage of the bullet the the bullet is destroyed
         {
             Bullet rec = collision.gameObject.GetComponent<Bullet>();
             setCurrentPV(getCurrentPV() - rec.getDamage());
@@ -152,12 +164,19 @@ public class Player : Entity
         }
     }
 
+    /// <summary>
+    /// update the slider of the healthbar
+    /// </summary>
     public void UpdateHealthSlider()
     {
         HealthBar.value = getCurrentPV();
         heathFilling.color = gradient.Evaluate(HealthBar.normalizedValue);
     }
 
+    /// <summary>
+    /// increase the score of the player by addScore
+    /// </summary>
+    /// <param name="addScore"></param>
     private void OnBulletHit(float addScore)
     {
         score += addScore;
@@ -167,6 +186,11 @@ public class Player : Entity
     {
         return score;
     }
+
+    /// <summary>
+    /// increase the score of the player by add
+    /// </summary>
+    /// <param name="add"></param>
 
     public void addScore(float add)
     {

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// this classe makes rotate the spaceships for the selection menu and the little one in the bottom right corner
+/// </summary>
 public class rotation : MonoBehaviour
 {
     void Start()
