@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// behavior of the asteroids
+/// </summary>
 public class asteroidsManager : MonoBehaviour
 {
     [SerializeField]
-    private Asteroids m_ast;
+    private Asteroids m_ast; //asteroid prefab
     [SerializeField]
-    private float m_spawningTime;
+    private float m_spawningTime; //spawning time between each asteroids
     [SerializeField]
-    private Camera m_mainCamera;
+    private Camera m_mainCamera; 
     [SerializeField]
     private GameObject m_spaceship;
 
-    private float height;
+    private float height; //hight of the player 
 
-    void Start()
+    void Start() //initialize the features
     {
         height = m_mainCamera.WorldToScreenPoint(m_spaceship.transform.position).z;
         StartCoroutine(Alea());
@@ -27,7 +30,7 @@ public class asteroidsManager : MonoBehaviour
         
     }
 
-    IEnumerator Alea()
+    IEnumerator Alea() //randomly spawn the asteroids
     {
         while (Application.isPlaying)
         {

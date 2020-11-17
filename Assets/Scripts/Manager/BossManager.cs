@@ -6,9 +6,9 @@ using UnityEngine;
 public class BossManager : MonoBehaviour
 {
     [SerializeField]
-    private Boss1 boss1;
+    private Boss1 boss1; //boss prefab
     [SerializeField]
-    private GameObject m_spaceship;
+    private GameObject m_spaceship; //player vessel prefab
     [SerializeField]
     private Camera m_mainCamera;
     [SerializeField]
@@ -27,7 +27,7 @@ public class BossManager : MonoBehaviour
 
     private float height;
     // Start is called before the first frame update
-    void Start()
+    void Start() //initialization of its feature
     {
         Boss1.Udead += newBoss;
         isPoped = false;

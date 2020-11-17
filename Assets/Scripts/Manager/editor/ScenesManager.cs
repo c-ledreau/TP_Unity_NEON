@@ -1,5 +1,4 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
@@ -7,6 +6,9 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// editor scripts that manage unity
+/// </summary>
 public class ScenesManager : EditorWindow
 {
     List<SceneData> listScene = new List<SceneData>();
@@ -22,12 +24,16 @@ public class ScenesManager : EditorWindow
 
     }
 
+    //create a new item in the Tools menu
     [MenuItem("Tools/Scenes manager")]
     static void ShowWindow()
     {
         GetWindow<ScenesManager>("new window");
     }
 
+    /// <summary>
+    /// after a refresh, display all the scene in the build windows
+    /// </summary>
     private void OnGUI()
     {
         GUILayout.BeginVertical();

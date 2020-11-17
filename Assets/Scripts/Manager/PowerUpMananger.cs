@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// handles the power up behaviour
+/// </summary>
 public class PowerUpMananger : MonoBehaviour
 {
     [SerializeField]
-    private PowerUp m_powerUp;
+    private PowerUp m_powerUp; //prefab of the power up
     [SerializeField]
     private float m_spawningTime;
     [SerializeField]
@@ -60,7 +63,7 @@ public class PowerUpMananger : MonoBehaviour
 
 
     /// <summary>
-    /// 
+    /// limit the power Ups
     /// </summary>
     /// <param name="pow"> pow is a powTypes enum which can be : fireRate, bulletSpeed, addGun, damage or score</param>
     private void PowerUpLimitor(PowerUp.powTypes pow)
@@ -121,6 +124,11 @@ public class PowerUpMananger : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// update the UI at the bottom of the screen
+    /// </summary>
+    /// <param name="ImageArray"> the image from the scene</param>
+    /// <param name="lvl"></param>
     private void updateImages(GameObject[] ImageArray, int lvl)
     {
         for (int i = 0; i < ImageArray.Length; i++)
@@ -137,7 +145,10 @@ public class PowerUpMananger : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// instanntiate a power up
+    /// </summary>
+    /// <param name="pos"> instatiation of the power at the pos position</param>
     public void spawPow(Vector3 pos)
     {
         m_powerUp.m_mainCamera = m_mainCamera;

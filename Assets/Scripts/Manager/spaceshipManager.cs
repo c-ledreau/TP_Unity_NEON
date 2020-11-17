@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// manage the selection of the of the spaceship
+/// </summary>
 public class spaceshipManager : MonoBehaviour
 {
-    public GameObject[] starchasers;
+    public GameObject[] starchasers; //list of the different spaceships
     public GameObject player;
     private int cpt;
     public GameObject eneMan;
@@ -16,10 +19,9 @@ public class spaceshipManager : MonoBehaviour
     {
         cpt = 0;
         //eneMan.SetActive(false);
-        bossMan.SetActive(false);
-        player.SetActive(false);
+        bossMan.SetActive(false); //deactivation of the boss manager
+        player.SetActive(false); //deactivation of the enemy manager
         DisplayStarchaser();
-
     }
 
     // Update is called once per frame
@@ -28,6 +30,9 @@ public class spaceshipManager : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// display the spaceship on the left
+    /// </summary>
     public void goLeft()
     {
         cpt--;
@@ -36,6 +41,9 @@ public class spaceshipManager : MonoBehaviour
         DisplayStarchaser();
     }
 
+    /// <summary>
+    /// display the spaceship on the right
+    /// </summary>
     public void goRight()
     {
         cpt++;
@@ -44,6 +52,9 @@ public class spaceshipManager : MonoBehaviour
         DisplayStarchaser();
     }
 
+    /// <summary>
+    /// display the spaceship regarding cpt
+    /// </summary>
     public void DisplayStarchaser()
     {
         foreach (GameObject star in starchasers)
@@ -53,6 +64,9 @@ public class spaceshipManager : MonoBehaviour
         starchasers[cpt].SetActive(true);
     }
 
+    /// <summary>
+    /// vaidation of the spaceship + activation of the managers
+    /// </summary>
     public void select()
     {
         eneMan.SetActive(true);
@@ -63,6 +77,9 @@ public class spaceshipManager : MonoBehaviour
         player.transform.GetChild(cpt).gameObject.SetActive(true);
     }
 
+    /// <summary>
+    /// modify the spaceship regarding which one was chosen
+    /// </summary>
     private void modifyPlayer()
     {
         Player ply = player.GetComponent<Player>();

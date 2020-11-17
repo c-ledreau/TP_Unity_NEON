@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// handles the spawn of the enemies
+/// </summary>
 public class enemyManager : MonoBehaviour
 {
     [SerializeField]
-    private enemy m_foe;
+    private enemy m_foe; //enemy prefab
     [SerializeField]
-    private shootingEnemy m_shootingFoe;
+    private shootingEnemy m_shootingFoe; //shooting enemy prefab
     [SerializeField]
-    private float m_spawningTime;
+    private float m_spawningTime; //spawning time between each anemies
     [SerializeField]
     private GameObject m_spaceship;
     [SerializeField]
@@ -28,14 +31,17 @@ public class enemyManager : MonoBehaviour
     {
     }
 
+    /// <summary>
+    /// launch the 2 coroutines of the spawning pattern of the enemy
+    /// </summary>
     public void Launch()
     {
         StartCoroutine(Pattern());
         StartCoroutine(Alea());
-        //StartCoroutine(Moving());
         height = m_mainCamera.WorldToScreenPoint(m_spaceship.transform.position).z;
     }
 
+    //randomly spawn enemies at the top of the screen
     IEnumerator Alea()
     {
         while (Application.isPlaying)
@@ -49,37 +55,14 @@ public class enemyManager : MonoBehaviour
             m_shootingFoe.transform.position = shootingFoePos;
 
             Instantiate(m_foe);
-            yield return new WaitForSeconds(Random.Range(0.1f,1.0f)* m_spawningTime);
+            yield return new WaitForSeconds(Random.Range(0.1f, 1.0f)* m_spawningTime);
             Instantiate(m_shootingFoe);
             yield return new WaitForSeconds(Random.Range(0.5f, 1.5f) * m_spawningTime);
         }
 
     }
 
-    IEnumerator Moving()
-    {
-        while (Application.isPlaying)
-        {
-            Vector3 Pos = m_mainCamera.ScreenToWorldPoint(new Vector3((cpt + 0.5f) * m_mainCamera.pixelWidth / 5, m_mainCamera.pixelHeight, height));
-            m_foe.m_mainCamera = m_mainCamera;
-            m_foe.transform.position = Pos;
-            enemy newOne = Instantiate(m_foe);
-            MovingNewOne(newOne);
-            cpt++;
-            yield return new WaitForSeconds(0.5f);
-            if (cpt == 5)
-            {
-                yield return new WaitForSeconds(5);
-                cpt = 0;
-            }
-        }
-    }
-
-    void MovingNewOne(enemy newO)
-    {
-        newO.transform.position += new Vector3(Time.deltaTime, 0, Time.deltaTime * 10);
-    }
-
+    //randomly select a pattern for the enemies
     IEnumerator Pattern()
     {
         while (Application.isPlaying)

@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// score manager
+/// </summary>
 public class ManagerJeu : MonoBehaviour
 {
     [SerializeField]
