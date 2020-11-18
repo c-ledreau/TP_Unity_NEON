@@ -40,7 +40,7 @@ public class BossManager : MonoBehaviour
         m_alert.gameObject.SetActive(true);
         m_alert.CrossFadeAlpha(0.0f, 0, false);
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -53,13 +53,13 @@ public class BossManager : MonoBehaviour
         }
     }
 
-    IEnumerator PopBoss1()
+    IEnumerator PopBoss1() //spawn the boss and its protections
     {
         //end spawn enemy
         m_enemyManager.SetActive(false);
         m_alert.gameObject.SetActive(true);
         m_alarme.Play();
-        for (int k = 0; k < 4; k++)
+        for (int k = 0; k < 4; k++) //modify the sound
         {
             m_alert.CrossFadeAlpha(1.0f, 0.5f, false);
             yield return new WaitForSeconds(.86f);
@@ -67,27 +67,23 @@ public class BossManager : MonoBehaviour
             yield return new WaitForSeconds(.86f);
         }
 
-        //yield return new WaitForSeconds(.5f);
-        //text appears
-            //spawn boss1
-
 
         boss1.m_mainCamera = m_mainCamera;
         height = m_mainCamera.WorldToScreenPoint(m_spaceship.transform.position).z;
-        Vector3 bossPos = m_mainCamera.ScreenToWorldPoint(new Vector3(Random.Range(m_mainCamera.pixelWidth * 0.3f, m_mainCamera.pixelWidth * 0.6f), m_mainCamera.pixelHeight+70, height));
+        Vector3 bossPos = m_mainCamera.ScreenToWorldPoint(new Vector3(Random.Range(m_mainCamera.pixelWidth * 0.3f, m_mainCamera.pixelWidth * 0.6f), m_mainCamera.pixelHeight+70, height)); //spawn the boos out of the screen randomly
         boss1.transform.position = bossPos;
         Instantiate(boss1);
 
         m_protection.m_mainCamera = m_mainCamera;
         height = m_mainCamera.WorldToScreenPoint(m_spaceship.transform.position).z;
-        for (int j = 0; j < 4; j++)
+        for (int j = 0; j < 4; j++)//spawn the first row of protection
         {
             Vector3 proPos = m_mainCamera.ScreenToWorldPoint(new Vector3((j) * m_mainCamera.pixelWidth / 4 , m_mainCamera.pixelHeight * 0.8f, height));
             m_protection.transform.position = proPos;
             m_protection.m_positive = true;
             Instantiate(m_protection);
         }
-        for (int j = 0; j < 4; j++)
+        for (int j = 0; j < 4; j++)//spawn the second row of protection
         {
             Vector3 proPos = m_mainCamera.ScreenToWorldPoint(new Vector3((j+1 ) * m_mainCamera.pixelWidth / 4 , m_mainCamera.pixelHeight * 0.7f, height));
             m_protection.transform.position = proPos;
@@ -95,15 +91,9 @@ public class BossManager : MonoBehaviour
             Instantiate(m_protection);
         }
     }
-
-    IEnumerator PopProtection()
-    {
-
-        yield return null;
-    }
-
+    
     private int cnt = 1;
-    private void newBoss()
+    private void newBoss()//initiolizatioon of the next boss
     {
         m_scoreForBoss = m_player.getScore() + 2500;
         boss1.m_MaxPV += 100;

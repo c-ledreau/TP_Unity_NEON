@@ -24,6 +24,7 @@ public class bossProtection : enemy
     {
         explosion = transform.GetComponent<ParticleSystem>();
         StartCoroutine(falseTime());
+        StartCoroutine(Wai());
         //Boss1.Udead += depop;
     }
 
@@ -90,6 +91,13 @@ public class bossProtection : enemy
             }
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    IEnumerator Wai()
+    {
+        yield return new WaitForSeconds(20);
+        setCurrentPV(0);
+        isDead();
     }
     /*
     private void depop()
