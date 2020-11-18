@@ -120,9 +120,9 @@ public class enemy : Entity
             if (bull.isFromPlayer())
             {
                 setCurrentPV(getCurrentPV() - bull.getDamage());
-                
+                Destroy(bull.gameObject);
             }
-            Destroy(bull.gameObject);
+            
         }
         isDead();
     }

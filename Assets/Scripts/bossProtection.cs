@@ -24,12 +24,13 @@ public class bossProtection : enemy
     {
         explosion = transform.GetComponent<ParticleSystem>();
         StartCoroutine(falseTime());
+        //Boss1.Udead += depop;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     /// <summary>
@@ -90,4 +91,10 @@ public class bossProtection : enemy
             yield return new WaitForEndOfFrame();
         }
     }
+    /*
+    private void depop()
+    {
+        if(isActiveAndEnabled)
+            Destroy(gameObject);
+    }*/
 }
