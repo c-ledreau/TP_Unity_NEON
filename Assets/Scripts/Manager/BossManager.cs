@@ -102,9 +102,13 @@ public class BossManager : MonoBehaviour
         yield return null;
     }
 
+    private int cnt = 1;
     private void newBoss()
     {
-        m_scoreForBoss = m_player.getScore() + 3000;
+        m_scoreForBoss = m_player.getScore() + 2500;
+        boss1.m_MaxPV += 100;
+        cnt++;
+        m_alert.text = "Warning\n\nGX2 - RZ STATION MK " + cnt + " incoming";
         isPoped = false;
     }
 
