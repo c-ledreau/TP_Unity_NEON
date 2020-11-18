@@ -25,7 +25,7 @@ public class enemy : Entity
     public static event SpamwPowAction spawn;
 
 
-    private bool ClémentIlFautMettreDesConditionsPlusStrictes = false;
+    private bool ClémentIlFautMettreDesConditionsPlusStrictes = false; //well..........
 
     protected override void Awake()
     {
